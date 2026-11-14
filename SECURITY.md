@@ -65,3 +65,4 @@ The system defines 5 hierarchical user roles (`backend/app/core/permissions.py`)
   - Captured metadata includes timestamps, actor IDs, prior state, new state, and full monetary delta.
 - **Credential Protection in Logs**:
   - Database connection strings, passwords, JWT secrets, and bearer tokens are strictly redacted from application logging outputs.
+

@@ -70,3 +70,4 @@ Validated against the independent `ground_truth_anomalies.csv`:
 - **Precision**: 100.0%
 - **Recall**: 100.0%
 - **F1 Score**: 1.000
+

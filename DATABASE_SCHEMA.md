@@ -1,6 +1,30 @@
 # Database Schema Documentation
 
-The Student Financial Management Platform utilizes MySQL 8.0 with InnoDB storage engine to guarantee ACID transactions, strict referential integrity, and sub-millisecond query performance over high-volume financial datasets.
+The Student Financial Management Platform utilizes MySQL 8.0 with InnoDB storage engine across 19 SQLAlchemy 2.0 models to guarantee ACID transactions, strict referential integrity, and sub-millisecond query performance over high-volume financial datasets.
+
+---
+
+## 1. Registered SQLAlchemy Models (19 Total)
+
+1. `User` (`users`): Authentication & credentials.
+2. `Role` (`roles`): Permission mappings.
+3. `Student` (`students`): Student master profiles.
+4. `Program` (`programs`): Degree programs & curriculums.
+5. `Term` (`terms`): Academic semesters & calendar dates.
+6. `FeeSchedule` (`fee_schedules`): Program term fee breakdowns.
+7. `Enrollment` (`enrollments`): Student program course bindings.
+8. `Invoice` (`invoices`): Master tuition billing invoices.
+9. `InvoiceLine` (`invoice_lines`): Prioritized charge components.
+10. `Payment` (`payments`): Multi-channel payment transactions.
+11. `PaymentAllocation` (`payment_allocations`): Line-item disbursements.
+12. `Refund` (`refunds`): Withdrawal and credit refunds.
+13. `Scholarship` (`scholarships`): Endowment aid schemes.
+14. `Eligibility` (`eligibilities`): Student scholarship awards.
+15. `FinancialEvent` (`financial_events`): Event-sourced audit trail.
+16. `AuditLog` (`audit_logs`): Operational audit logs.
+17. `Anomaly` (`anomalies`): Exception records.
+18. `ReconciliationRun` (`reconciliation_runs`): Audit executions.
+19. `ReconciliationResult` (`reconciliation_results`): Line-item audit variances.
 
 ---
 
@@ -224,3 +248,4 @@ The Student Financial Management Platform utilizes MySQL 8.0 with InnoDB storage
 #### `reconciliation_runs` & `reconciliation_results`
 - `reconciliation_runs`: Track audit executions (`run_id`, `run_date`, `total_invoices`, `matched_count`, `mismatched_count`, `exception_count`, `status`).
 - `reconciliation_results`: Granular line-item audit (`expected_amount`, `actual_amount`, `difference`, `status`, `exception_type`).
+

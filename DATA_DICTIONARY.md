@@ -69,3 +69,4 @@ This document details the operational data dictionary, attribute specifications,
 - **Currency**: ISO-4217 standard (`INR`, Indian Rupee).
 - **Date Formats**: ISO-8601 (`YYYY-MM-DD` for dates, `YYYY-MM-DDTHH:MM:SSZ` for UTC timestamps).
 - **Rounding Rule**: Standard banker's rounding (`ROUND_HALF_UP`) with 2 decimal places.
+

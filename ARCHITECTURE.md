@@ -34,7 +34,7 @@ The Student Financial Management Platform follows a strict 3-tier enterprise arc
 |   - AnomalyDetectionService     - ImmutableAuditService               |
 |                                                                       |
 |  [ Data Access Layer ]                                                |
-|   - Repository Pattern (SQLAlchemy 2.0 ORM)                           |
+|   - Repository Pattern (SQLAlchemy 2.0 ORM over 19 Models)            |
 +-----------------------------------+-----------------------------------+
                                     |
                                     | SQL / Connection Pool (PyMySQL)
@@ -108,3 +108,4 @@ The Student Financial Management Platform follows a strict 3-tier enterprise arc
 2. Cross-compares sum of invoice lines, payment allocations, and recorded ledger entries.
 3. Flags discrepancies as `MISMATCHED` or `EXCEPTION` with variance calculation.
 4. `AnomalyDetectionService` inspects the active dataset for non-compliant states (overpayments, duplicates, cap breaches) and records actionable records in `anomalies` table.
+

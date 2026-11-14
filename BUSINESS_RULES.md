@@ -92,3 +92,4 @@ When a payment is recorded with `auto_allocate=True`, funds are disbursed sequen
   1. Student/Staff initiates request (`REQUESTED`).
   2. Finance Officer approves amount (`APPROVED`).
   3. Disbursement processed to bank/gateway (`PROCESSED`), which credits the student ledger and marks associated invoice lines accordingly.
+

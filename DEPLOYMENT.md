@@ -111,3 +111,4 @@ docker-compose down
 | `ALGORITHM` | `HS256` | JWT signature algorithm. |
 | `ACCESS_TOKEN_EXPIRE_MINUTES`| `60` | Token validity duration in minutes. |
 | `CORS_ORIGINS` | `["http://localhost:80", ...]` | Allowed HTTP origins array. |
+

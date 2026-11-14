@@ -43,10 +43,17 @@ The referential validator verified every single relationship across all generate
 
 - **Invoice Header vs Lines**:
   $$\sum \text{invoices.gross\_amount} == \sum \text{invoice\_lines.gross\_amount}$$
-  - Full Scale Total: `₹2,013,070,000.00` across 30,001 invoices and 180,000 lines. Parity: 100%.
-- **Payments vs Allocations**:
+  - Full Scale Gross Total: `₹2,013,070,000.00` across 30,001 invoices and 180,000 lines. Parity: 100%.
+  - Full Scale Invoice Discounts: `₹432,617,900.00`.
+  - Full Scale Net Invoiced: `₹1,580,452,100.00`.
+- **Payments vs Invoices**:
   - Full Scale Payments Total: `₹1,388,949,250.00` across 50,000 payments.
-  - Multi-installment payment distribution: 3,000 unpaid, 4,000 single partial payments, 23,000 two-installment payments.
+  - Multi-installment payment distribution: 3,000 unpaid invoices, 4,000 single partial payments, 23,000 two-installment payments.
+  - Net Outstanding Balance: `₹191,507,350.00`.
+- **Scholarships vs Awards**:
+  - Approved Awards Total (`eligibilities.csv`): `₹432,632,900.00` across 15,000 awards.
+  - Total Awarded in Schemes (`scholarships.csv`): `₹432,582,900.00`.
+  - Variance: Exactly `₹50,000.00`, accounted for by Ground Truth Anomaly 2 (`SCHOLARSHIP_EXCEEDS_FEES`).
 - **Refund Invariants**:
   - All refunds validated $\le$ original payment amount.
 
@@ -79,3 +86,4 @@ The referential validator verified every single relationship across all generate
 - **Checksum Parity**:
   - 15 out of 15 CSV files produced 100% identical SHA-256 bit-level hashes.
   - Zero divergence in generated business IDs, financial values, or relational bindings.
+

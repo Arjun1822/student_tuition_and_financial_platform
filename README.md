@@ -23,8 +23,8 @@ An enterprise-grade, 3-tier financial management and reconciliation platform bui
 5. **Refunds & Term Withdrawals**:
    - Withdrawal refund claim intake with validation against refundable balances (`REF-XXXXXX`).
    - Multi-tier governance: `REQUESTED` $\rightarrow$ `APPROVED` $\rightarrow$ `PROCESSED`.
-6. **Double-Entry Financial Ledger & Audit Trail**:
-   - Append-only, immutable financial events log (`EVT-XXXXXX`) with debit/credit indicators.
+6. **Immutable Financial Event Ledger & Audit Trail**:
+   - Append-only, immutable event-sourced audit log (`EVT-XXXXXX`) capturing financial events with before/after state deltas.
    - On-demand real-time student balance statements reconciling gross charges, fee waivers, collected payments, and net liabilities.
 7. **Multi-Period Reconciliation Engine**:
    - Automated discrepancy auditing across invoice lines and ledger totals (`REC-XXXXXX`).
@@ -155,3 +155,4 @@ npm run build
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Docker and production configuration guides.
 - [SECURITY.md](SECURITY.md) - Authentication, RBAC, input sanitization, and audit posture.
 - [VALIDATION_REPORT.md](VALIDATION_REPORT.md) - Synthetic data verification and metric compliance.
+

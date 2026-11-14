@@ -170,3 +170,4 @@ The platform provides a modular, RESTful API mounted under the `/api/v1` namespa
 - **Payload**:
   - `kpis`: `total_students`, `active_enrollments`, `total_invoice_value`, `scholarships_awarded`, `payments_collected`, `outstanding_balance`, `overdue_invoices`, `refunds_processed`, `unresolved_anomalies`.
   - `charts`: `invoices_by_status`, `payments_by_status`, `anomalies_by_type`, `outstanding_by_program`.
+

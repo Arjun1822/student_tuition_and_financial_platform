@@ -76,3 +76,4 @@ python backend\scripts\validate_data.py --data-dir data/full
 - **Referential Integrity**: PASSED
 - **Financial Precision**: PASSED
 - **Anomaly Detection**: Precision: 100.0%, Recall: 100.0%, F1 Score: 1.0
+
