@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const anomaliesApi = {
   getAnomalies: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/anomalies/', { params });
+    const response = await apiClient.get('/api/v1/anomalies', { params });
     return response.data;
   },
 

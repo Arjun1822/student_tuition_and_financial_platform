@@ -20,6 +20,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=ProgramListResponse, summary="List academic programs")
+@router.get("", response_model=ProgramListResponse, include_in_schema=False)
 def list_programs(
     department: Optional[str] = Query(None, description="Filter by department"),
     degree_level: Optional[DegreeLevel] = Query(None, description="Filter by degree level"),

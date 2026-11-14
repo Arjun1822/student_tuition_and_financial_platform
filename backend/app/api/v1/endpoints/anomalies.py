@@ -21,6 +21,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[AnomalyResponse])
+@router.get("/", response_model=PaginatedResponse[AnomalyResponse], include_in_schema=False)
 def list_anomalies(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),

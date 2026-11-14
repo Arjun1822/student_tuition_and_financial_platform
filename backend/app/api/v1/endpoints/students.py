@@ -20,6 +20,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=StudentListResponse, summary="List students with search and pagination")
+@router.get("", response_model=StudentListResponse, include_in_schema=False)
 def list_students(
     search: Optional[str] = Query(None, description="Search by name, email, or student ID"),
     status_filter: Optional[StudentStatus] = Query(None, alias="status", description="Filter by status"),

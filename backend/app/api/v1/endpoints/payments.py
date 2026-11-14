@@ -20,6 +20,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[PaymentResponse])
+@router.get("/", response_model=PaginatedResponse[PaymentResponse], include_in_schema=False)
 def list_payments(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
@@ -57,6 +58,7 @@ def list_payments(
 
 
 @router.post("", response_model=PaymentResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=PaymentResponse, status_code=status.HTTP_201_CREATED, include_in_schema=False)
 def record_payment(
     payment_in: PaymentCreate,
     db: Session = Depends(get_db),

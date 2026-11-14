@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const programsApi = {
   getPrograms: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/programs/', { params });
+    const response = await apiClient.get('/api/v1/programs', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const programsApi = {
   },
 
   createProgram: async (data) => {
-    const response = await apiClient.post('/api/v1/programs/', data);
+    const response = await apiClient.post('/api/v1/programs', data);
     return response.data;
   },
 

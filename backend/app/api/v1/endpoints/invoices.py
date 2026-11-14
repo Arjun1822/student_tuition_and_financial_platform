@@ -21,6 +21,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=InvoiceListResponse, summary="List invoices with filters and pagination")
+@router.get("", response_model=InvoiceListResponse, include_in_schema=False)
 def list_invoices(
     student_id: Optional[int] = Query(None, description="Filter by student database ID"),
     status_filter: Optional[InvoiceStatus] = Query(None, alias="status", description="Filter by invoice status"),

@@ -22,6 +22,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=FeeScheduleListResponse, summary="List program fee schedules")
+@router.get("", response_model=FeeScheduleListResponse, include_in_schema=False)
 def list_fee_schedules(
     program_id: Optional[int] = Query(None, description="Filter by program ID"),
     term_id: Optional[int] = Query(None, description="Filter by term ID"),

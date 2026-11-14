@@ -13,6 +13,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[PaymentAllocationResponse])
+@router.get("/", response_model=PaginatedResponse[PaymentAllocationResponse], include_in_schema=False)
 def list_payment_allocations(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),

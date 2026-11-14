@@ -91,7 +91,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Scholarships />
         </MemoryRouter>
       );
@@ -138,7 +138,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Payments />
         </MemoryRouter>
       );
@@ -182,7 +182,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Refunds />
         </MemoryRouter>
       );
@@ -218,7 +218,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Ledger />
         </MemoryRouter>
       );
@@ -259,7 +259,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Reconciliation />
         </MemoryRouter>
       );
@@ -303,7 +303,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Anomalies />
         </MemoryRouter>
       );
@@ -346,7 +346,7 @@ describe('Task 4: Financial Management Frontend Pages', () => {
       });
 
       render(
-        <MemoryRouter>
+        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Reports />
         </MemoryRouter>
       );

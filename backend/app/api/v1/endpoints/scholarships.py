@@ -25,6 +25,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[ScholarshipResponse])
+@router.get("/", response_model=PaginatedResponse[ScholarshipResponse], include_in_schema=False)
 def list_scholarships(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
@@ -53,6 +54,7 @@ def list_scholarships(
 
 
 @router.post("", response_model=ScholarshipResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ScholarshipResponse, status_code=status.HTTP_201_CREATED, include_in_schema=False)
 def create_scholarship(
     sch_in: ScholarshipCreate,
     db: Session = Depends(get_db),

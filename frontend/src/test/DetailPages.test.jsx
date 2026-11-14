@@ -55,7 +55,10 @@ describe('Frontend Detail Pages & Integration', () => {
       feeSchedulesApi.getFeeSchedules.mockResolvedValue(mockFeeSchedules);
 
       render(
-        <MemoryRouter initialEntries={['/programs/1']}>
+        <MemoryRouter
+          initialEntries={['/programs/1']}
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <Routes>
             <Route path="/programs/:id" element={<ProgramDetails />} />
           </Routes>
@@ -82,7 +85,10 @@ describe('Frontend Detail Pages & Integration', () => {
       });
 
       render(
-        <MemoryRouter initialEntries={['/programs/999']}>
+        <MemoryRouter
+          initialEntries={['/programs/999']}
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <Routes>
             <Route path="/programs/:id" element={<ProgramDetails />} />
           </Routes>
@@ -148,7 +154,10 @@ describe('Frontend Detail Pages & Integration', () => {
       invoicesApi.getInvoices.mockResolvedValue(mockInvoices);
 
       render(
-        <MemoryRouter initialEntries={['/enrollments/1']}>
+        <MemoryRouter
+          initialEntries={['/enrollments/1']}
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <Routes>
             <Route path="/enrollments/:id" element={<EnrollmentDetails />} />
           </Routes>
@@ -216,7 +225,10 @@ describe('Frontend Detail Pages & Integration', () => {
       invoicesApi.getInvoice.mockResolvedValue(mockInvoice);
 
       render(
-        <MemoryRouter initialEntries={['/invoices/1']}>
+        <MemoryRouter
+          initialEntries={['/invoices/1']}
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <Routes>
             <Route path="/invoices/:id" element={<InvoiceDetails />} />
           </Routes>

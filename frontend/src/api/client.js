@@ -26,13 +26,19 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    const status = error.response ? error.response.status : null;
+    const isLoginEndpoint = error.config?.url?.includes('/api/v1/auth/login');
+
+    // 401 Unauthorized triggers reauthentication only for protected endpoints when the token is genuinely invalid or expired.
+    // Login requests returning 401 should display invalid credentials in the form rather than redirecting.
+    if (status === 401 && !isLoginEndpoint) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
     }
+    // 403 Forbidden indicates an authorization/permission refusal: preserve the session and let the UI display the error message.
     return Promise.reject(error);
   }
 );

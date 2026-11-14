@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const invoicesApi = {
   getInvoices: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/invoices/', { params });
+    const response = await apiClient.get('/api/v1/invoices', { params });
     return response.data;
   },
 

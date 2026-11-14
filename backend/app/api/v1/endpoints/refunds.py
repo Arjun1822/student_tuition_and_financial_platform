@@ -20,6 +20,7 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[RefundResponse])
+@router.get("/", response_model=PaginatedResponse[RefundResponse], include_in_schema=False)
 def list_refunds(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
@@ -59,6 +60,7 @@ def list_refunds(
 
 
 @router.post("", response_model=RefundResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=RefundResponse, status_code=status.HTTP_201_CREATED, include_in_schema=False)
 def request_refund(
     refund_in: RefundCreate,
     db: Session = Depends(get_db),

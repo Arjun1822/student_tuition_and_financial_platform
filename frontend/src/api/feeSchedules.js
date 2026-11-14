@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const feeSchedulesApi = {
   getFeeSchedules: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/fee-schedules/', { params });
+    const response = await apiClient.get('/api/v1/fee-schedules', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const feeSchedulesApi = {
   },
 
   createFeeSchedule: async (data) => {
-    const response = await apiClient.post('/api/v1/fee-schedules/', data);
+    const response = await apiClient.post('/api/v1/fee-schedules', data);
     return response.data;
   },
 

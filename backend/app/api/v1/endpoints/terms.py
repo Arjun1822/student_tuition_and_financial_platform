@@ -15,6 +15,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=List[TermResponse], summary="List all academic terms")
+@router.get("", response_model=List[TermResponse], include_in_schema=False)
 def list_terms(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)

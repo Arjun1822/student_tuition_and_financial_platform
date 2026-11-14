@@ -27,6 +27,7 @@ class LateFeeAssessRequest(BaseModel):
 
 
 @router.get("/events", response_model=PaginatedResponse[FinancialEventResponse])
+@router.get("/events/", response_model=PaginatedResponse[FinancialEventResponse], include_in_schema=False)
 def list_financial_events(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),

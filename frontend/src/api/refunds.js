@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const refundsApi = {
   getRefunds: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/refunds/', { params });
+    const response = await apiClient.get('/api/v1/refunds', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const refundsApi = {
   },
 
   requestRefund: async (data) => {
-    const response = await apiClient.post('/api/v1/refunds/', data);
+    const response = await apiClient.post('/api/v1/refunds', data);
     return response.data;
   },
 

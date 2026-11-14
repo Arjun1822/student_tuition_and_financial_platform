@@ -25,6 +25,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=EnrollmentListResponse, summary="List enrollments with filters and pagination")
+@router.get("", response_model=EnrollmentListResponse, include_in_schema=False)
 def list_enrollments(
     student_id: Optional[int] = Query(None, description="Filter by student ID"),
     program_id: Optional[int] = Query(None, description="Filter by program ID"),

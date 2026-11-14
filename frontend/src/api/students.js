@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const studentsApi = {
   getStudents: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/students/', { params });
+    const response = await apiClient.get('/api/v1/students', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const studentsApi = {
   },
 
   createStudent: async (data) => {
-    const response = await apiClient.post('/api/v1/students/', data);
+    const response = await apiClient.post('/api/v1/students', data);
     return response.data;
   },
 

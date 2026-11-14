@@ -34,6 +34,7 @@ def trigger_reconciliation(
 
 
 @router.get("/runs", response_model=PaginatedResponse[ReconciliationRunResponse])
+@router.get("/runs/", response_model=PaginatedResponse[ReconciliationRunResponse], include_in_schema=False)
 def list_reconciliation_runs(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),

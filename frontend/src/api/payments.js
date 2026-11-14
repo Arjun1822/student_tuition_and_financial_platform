@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const paymentsApi = {
   getPayments: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/payments/', { params });
+    const response = await apiClient.get('/api/v1/payments', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const paymentsApi = {
   },
 
   recordPayment: async (data) => {
-    const response = await apiClient.post('/api/v1/payments/', data);
+    const response = await apiClient.post('/api/v1/payments', data);
     return response.data;
   },
 
@@ -27,7 +27,7 @@ export const paymentsApi = {
   },
 
   getPaymentAllocations: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/payment-allocations/', { params });
+    const response = await apiClient.get('/api/v1/payment-allocations', { params });
     return response.data;
   },
 };

@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const scholarshipsApi = {
   getScholarships: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/scholarships/', { params });
+    const response = await apiClient.get('/api/v1/scholarships', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const scholarshipsApi = {
   },
 
   createScholarship: async (data) => {
-    const response = await apiClient.post('/api/v1/scholarships/', data);
+    const response = await apiClient.post('/api/v1/scholarships', data);
     return response.data;
   },
 
@@ -27,7 +27,7 @@ export const scholarshipsApi = {
   },
 
   getEligibilities: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/eligibilities/', { params });
+    const response = await apiClient.get('/api/v1/eligibilities', { params });
     return response.data;
   },
 

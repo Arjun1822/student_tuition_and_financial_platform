@@ -2,7 +2,7 @@ import apiClient from './client';
 
 export const enrollmentsApi = {
   getEnrollments: async (params = {}) => {
-    const response = await apiClient.get('/api/v1/enrollments/', { params });
+    const response = await apiClient.get('/api/v1/enrollments', { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const enrollmentsApi = {
   },
 
   createEnrollment: async (data) => {
-    const response = await apiClient.post('/api/v1/enrollments/', data);
+    const response = await apiClient.post('/api/v1/enrollments', data);
     return response.data;
   },
 

@@ -74,10 +74,42 @@ def get_current_user(
 get_current_active_user = get_current_user
 
 
+class RoleChecker:
+    """Dependency class checking that the current user has one of the allowed roles."""
+    def __init__(self, allowed_roles: list):
+        self.allowed_roles = {
+            r.value if hasattr(r, "value") else str(r) for r in allowed_roles
+        }
+        self.allowed_roles.add("PLATFORM_ADMIN")
+
+    def __call__(self, current_user=Depends(get_current_user)):
+        user_role = getattr(current_user, "role", None)
+        user_role_str = user_role.value if hasattr(user_role, "value") else str(user_role)
+        
+        if user_role_str not in self.allowed_roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Operation not permitted. Required one of roles: {list(self.allowed_roles)}"
+            )
+        return current_user
+
+
 def require_permissions(permissions: list):
     """Dependency that verifies user permissions or role privileges."""
     def permission_checker(current_user=Depends(get_current_user)):
-        # Platform admin and superusers are universally granted permissions
+        user_role = getattr(current_user, "role", None)
+        user_role_str = user_role.value if hasattr(user_role, "value") else str(user_role)
+        
+        # PLATFORM_ADMIN has superset privileges
+        if user_role_str == "PLATFORM_ADMIN":
+            return current_user
+            
+        # Admin access permissions check
+        if "ADMIN_ACCESS" in permissions and user_role_str not in ["PLATFORM_ADMIN", "ACADEMIC_ADMIN"]:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Operation not permitted. Required permissions: {permissions}"
+            )
         return current_user
     return permission_checker
 
