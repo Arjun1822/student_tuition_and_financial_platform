@@ -23,3 +23,4 @@ export const anomaliesApi = {
 };
 
 export default anomaliesApi;
+

@@ -48,3 +48,4 @@ export const scholarshipsApi = {
 };
 
 export default scholarshipsApi;
+
