@@ -1,0 +1,6 @@
+id,scholarship_id,name,description,scholarship_type,percentage,max_amount,min_gpa,max_family_income_category,total_budget,awarded_amount,status,academic_year
+1,SCH-2026-000001,Merit Academic Excellence Award,Institutional funding program: Merit Academic Excellence Award,MERIT,50.00,50000.00,8.50,,1000000000.000,137221500.00,ACTIVE,2026-2027
+2,SCH-2026-000002,Need-Based Tuition Assistance,Institutional funding program: Need-Based Tuition Assistance,NEED_BASED,40.00,35000.00,6.50,LOW,800000000.000,279203400.00,ACTIVE,2026-2027
+3,SCH-2026-000003,Women in STEM Leadership Grant,Institutional funding program: Women in STEM Leadership Grant,SPECIAL,60.00,60000.00,7.50,,500000000.000,0.00,ACTIVE,2026-2027
+4,SCH-2026-000004,Computer Science Department Honors,Institutional funding program: Computer Science Department Honors,PROGRAM_SPECIFIC,30.00,25000.00,8.00,,400000000.000,0.00,ACTIVE,2026-2027
+5,SCH-2026-000005,Athletic Champions Scholarship,Institutional funding program: Athletic Champions Scholarship,ATHLETIC,50.00,40000.00,6.00,,300000000.000,16158000.00,ACTIVE,2026-2027

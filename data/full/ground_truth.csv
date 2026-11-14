@@ -1,0 +1,6 @@
+anomaly_id,issue_type,entity_type,entity_id,expected_value,actual_value,explanation
+GT-ANM-000001,PAYMENT_OVER_ALLOCATED,PAYMENT,PAY-2026-000001,35000.0,40000.0,Payment PAY-2026-000001 allocations exceed available amount.
+GT-ANM-000002,SCHOLARSHIP_EXCEEDS_FEES,SCHOLARSHIP_ELIGIBILITY,ELIG-000001,70000.0,85000.0,Approved scholarship ELIG-000001 exceeds eligible tuition fee.
+GT-ANM-000003,DUPLICATE_INVOICE,INVOICE,INV-STU-000001-2026-000002-DUP,1.0,2.0,Duplicate invoice INV-STU-000001-2026-000002-DUP generated for same enrollment cycle.
+GT-ANM-000004,REFUND_EXCEEDS_PAID,PAYMENT,PAY-2026-000002,17500.0,19500.0,Refund sum 19500.00 exceeds payment amount 17500.00.
+GT-ANM-000005,BALANCE_MISMATCH,INVOICE,INV-STU-000001-2026-000003,0.0,4500.0,Invoice INV-STU-000001-2026-000003 stored balance disagrees with arithmetic.

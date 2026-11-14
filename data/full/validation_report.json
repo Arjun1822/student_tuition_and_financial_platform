@@ -1,0 +1,100 @@
+{
+  "validation_passed": true,
+  "data_directory": "data/full",
+  "referential_integrity": {
+    "passed": true,
+    "checks": {
+      "pk_uniqueness": {
+        "students": true,
+        "programs": true,
+        "terms": true,
+        "fee_schedules": true,
+        "enrollments": true,
+        "invoices": true,
+        "invoice_lines": true,
+        "scholarships": true,
+        "eligibilities": true,
+        "payments": true,
+        "payment_allocations": true,
+        "refunds": true
+      },
+      "foreign_keys": {
+        "enrollments_to_students": true,
+        "enrollments_to_programs": true,
+        "enrollments_to_terms": true,
+        "fee_schedules_to_programs": true,
+        "fee_schedules_to_terms": true,
+        "invoices_to_enrollments": true,
+        "invoices_to_students": true,
+        "invoices_to_terms": true,
+        "invoice_lines_to_invoices": true,
+        "eligibilities_to_students": true,
+        "eligibilities_to_scholarships": true,
+        "eligibilities_to_enrollments": true,
+        "payments_to_students": true,
+        "allocations_to_payments": true,
+        "allocations_to_invoice_lines": true,
+        "refunds_to_payments": true,
+        "refunds_to_students": true
+      }
+    }
+  },
+  "financial_arithmetic": {
+    "passed": true,
+    "checks": {
+      "invoice_arithmetic_valid": true,
+      "payment_arithmetic_valid": true,
+      "scholarship_budgets_valid": true
+    }
+  },
+  "anomaly_evaluation": {
+    "passed": true,
+    "ground_truth_count": 5,
+    "detected_count": 5,
+    "true_positives": 5,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "matched_anomalies": [
+      {
+        "issue_type": "PAYMENT_OVER_ALLOCATED",
+        "entity_id": "PAY-2026-000001",
+        "expected_value": 35000.0,
+        "actual_value": 40000.0,
+        "match": true
+      },
+      {
+        "issue_type": "SCHOLARSHIP_EXCEEDS_FEES",
+        "entity_id": "ELIG-000001",
+        "expected_value": 70000.0,
+        "actual_value": 85000.0,
+        "match": true
+      },
+      {
+        "issue_type": "DUPLICATE_INVOICE",
+        "entity_id": "INV-STU-000001-2026-000002-DUP",
+        "expected_value": 1.0,
+        "actual_value": 2.0,
+        "match": true
+      },
+      {
+        "issue_type": "REFUND_EXCEEDS_PAID",
+        "entity_id": "PAY-2026-000002",
+        "expected_value": 17500.0,
+        "actual_value": 19500.0,
+        "match": true
+      },
+      {
+        "issue_type": "BALANCE_MISMATCH",
+        "entity_id": "INV-STU-000001-2026-000003",
+        "expected_value": 0.0,
+        "actual_value": 4500.0,
+        "match": true
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": []
+}

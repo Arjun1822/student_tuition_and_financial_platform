@@ -1,0 +1,101 @@
+id,student_id,first_name,last_name,email,phone,date_of_birth,address,city,state,country,postal_code,family_income_category,gpa,status
+1,STU-000001,Myra,Reddy,myra.reddy1@university.edu,+918037582237,2004-02-02,"236, MG Road",Chennai,Tamil Nadu,India,600001,LOW,8.86,ACTIVE
+2,STU-000002,Ayaan,Sharma,ayaan.sharma2@university.edu,+919745048858,2005-03-03,"719, MG Road",Delhi,Delhi,India,110001,LOW,6.7,ACTIVE
+3,STU-000003,Saanvi,Sengupta,saanvi.sengupta3@university.edu,+919182269912,2006-04-04,"119, MG Road",Mumbai,Maharashtra,India,400001,HIGH,8.54,ACTIVE
+4,STU-000004,Reyansh,Dutta,reyansh.dutta4@university.edu,+917605297423,2003-05-05,"599, MG Road",Ahmedabad,Gujarat,India,380001,LOW,6.21,ACTIVE
+5,STU-000005,Dhruv,Chatterjee,dhruv.chatterjee5@university.edu,+917631106059,2004-06-06,"469, MG Road",Bengaluru,Karnataka,India,560001,VERY_HIGH,6.72,ACTIVE
+6,STU-000006,Aditya,Patel,aditya.patel6@university.edu,+917407849435,2005-07-07,"863, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,8.07,ACTIVE
+7,STU-000007,Sai,Bose,sai.bose7@university.edu,+917196759154,2006-08-08,"130, MG Road",Pune,Maharashtra,India,411001,MEDIUM,9.28,ACTIVE
+8,STU-000008,Sara,Choudhury,sara.choudhury8@university.edu,+918592867095,2003-09-09,"99, MG Road",Hyderabad,Telangana,India,500001,HIGH,8.58,ACTIVE
+9,STU-000009,Ishaan,Banerjee,ishaan.banerjee9@university.edu,+917944757545,2004-10-10,"583, MG Road",Hyderabad,Telangana,India,500001,LOW,6.22,ACTIVE
+10,STU-000010,Diya,Chatterjee,diya.chatterjee10@university.edu,+917256360293,2005-11-11,"375, MG Road",Mumbai,Maharashtra,India,400001,HIGH,8.54,ACTIVE
+11,STU-000011,Vivaan,Dutta,vivaan.dutta11@university.edu,+918021834383,2006-12-12,"907, MG Road",Pune,Maharashtra,India,411001,MEDIUM,6.21,ACTIVE
+12,STU-000012,Aarav,Joshi,aarav.joshi12@university.edu,+919220703948,2003-01-13,"682, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,8.87,ACTIVE
+13,STU-000013,Dhruv,Verma,dhruv.verma13@university.edu,+917515533437,2004-02-14,"32, MG Road",Chennai,Tamil Nadu,India,600001,HIGH,7.98,ACTIVE
+14,STU-000014,Siya,Iyer,siya.iyer14@university.edu,+917059995821,2005-03-15,"396, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,9.06,ACTIVE
+15,STU-000015,Gauri,Nair,gauri.nair15@university.edu,+919861449210,2006-04-16,"206, MG Road",Pune,Maharashtra,India,411001,MEDIUM,6.41,ACTIVE
+16,STU-000016,Navya,Rao,navya.rao16@university.edu,+918106896580,2003-05-17,"324, MG Road",Ahmedabad,Gujarat,India,380001,MEDIUM,7.53,ACTIVE
+17,STU-000017,Gauri,Choudhury,gauri.choudhury17@university.edu,+918536059350,2004-06-18,"183, MG Road",Kolkata,West Bengal,India,700001,HIGH,8.49,ACTIVE
+18,STU-000018,Arjun,Banerjee,arjun.banerjee18@university.edu,+917653453135,2005-07-19,"663, MG Road",Delhi,Delhi,India,110001,MEDIUM,7.97,ACTIVE
+19,STU-000019,Aarav,Verma,aarav.verma19@university.edu,+919312315002,2006-08-20,"777, MG Road",Ahmedabad,Gujarat,India,380001,MEDIUM,8.43,ACTIVE
+20,STU-000020,Sara,Banerjee,sara.banerjee20@university.edu,+919094322953,2003-09-21,"443, MG Road",Hyderabad,Telangana,India,500001,LOW,8.8,ACTIVE
+21,STU-000021,Myra,Das,myra.das21@university.edu,+919433981483,2004-10-22,"750, MG Road",Delhi,Delhi,India,110001,LOW,7.13,ACTIVE
+22,STU-000022,Aarav,Sengupta,aarav.sengupta22@university.edu,+917793755078,2005-11-23,"415, MG Road",Pune,Maharashtra,India,411001,MEDIUM,8.05,ACTIVE
+23,STU-000023,Shaurya,Verma,shaurya.verma23@university.edu,+919948400696,2006-12-24,"201, MG Road",Kolkata,West Bengal,India,700001,LOW,8.9,ACTIVE
+24,STU-000024,Aarav,Nair,aarav.nair24@university.edu,+917269158514,2003-01-25,"640, MG Road",Kolkata,West Bengal,India,700001,MEDIUM,7.78,ACTIVE
+25,STU-000025,Khushi,Sharma,khushi.sharma25@university.edu,+918732408467,2004-02-26,"66, MG Road",Delhi,Delhi,India,110001,HIGH,7.35,ACTIVE
+26,STU-000026,Vihaan,Kumar,vihaan.kumar26@university.edu,+917634047283,2005-03-27,"413, MG Road",Ahmedabad,Gujarat,India,380001,HIGH,7.41,ACTIVE
+27,STU-000027,Tanvi,Bose,tanvi.bose27@university.edu,+918426764792,2006-04-01,"622, MG Road",Kolkata,West Bengal,India,700001,MEDIUM,7.25,ACTIVE
+28,STU-000028,Ishaan,Verma,ishaan.verma28@university.edu,+919219392015,2003-05-02,"229, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,6.9,ACTIVE
+29,STU-000029,Diya,Mehta,diya.mehta29@university.edu,+919055034393,2004-06-03,"490, MG Road",Bengaluru,Karnataka,India,560001,LOW,7.54,ACTIVE
+30,STU-000030,Rohan,Reddy,rohan.reddy30@university.edu,+919344596253,2005-07-04,"143, MG Road",Pune,Maharashtra,India,411001,MEDIUM,7.65,ACTIVE
+31,STU-000031,Isha,Singh,isha.singh31@university.edu,+917300223587,2006-08-05,"411, MG Road",Pune,Maharashtra,India,411001,MEDIUM,8.07,ACTIVE
+32,STU-000032,Gauri,Dutta,gauri.dutta32@university.edu,+917326699212,2003-09-06,"936, MG Road",Mumbai,Maharashtra,India,400001,HIGH,9.18,ACTIVE
+33,STU-000033,Myra,Dutta,myra.dutta33@university.edu,+919389671754,2004-10-07,"982, MG Road",Ahmedabad,Gujarat,India,380001,HIGH,6.57,ACTIVE
+34,STU-000034,Myra,Das,myra.das34@university.edu,+917767657786,2005-11-08,"532, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,7.16,ACTIVE
+35,STU-000035,Krishna,Dutta,krishna.dutta35@university.edu,+919368557496,2006-12-09,"556, MG Road",Kolkata,West Bengal,India,700001,LOW,9.36,ACTIVE
+36,STU-000036,Krishna,Singh,krishna.singh36@university.edu,+919821719840,2003-01-10,"67, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,7.02,ACTIVE
+37,STU-000037,Siya,Mehta,siya.mehta37@university.edu,+917774091265,2004-02-11,"316, MG Road",Delhi,Delhi,India,110001,MEDIUM,8.95,ACTIVE
+38,STU-000038,Ananya,Rao,ananya.rao38@university.edu,+917861601639,2005-03-12,"33, MG Road",Pune,Maharashtra,India,411001,VERY_HIGH,7.3,ACTIVE
+39,STU-000039,Reyansh,Patel,reyansh.patel39@university.edu,+919956864879,2006-04-13,"844, MG Road",Kolkata,West Bengal,India,700001,MEDIUM,7.78,ACTIVE
+40,STU-000040,Arjun,Rao,arjun.rao40@university.edu,+919568783553,2003-05-14,"790, MG Road",Hyderabad,Telangana,India,500001,LOW,7.45,ACTIVE
+41,STU-000041,Dhruv,Patel,dhruv.patel41@university.edu,+918274760255,2004-06-15,"123, MG Road",Ahmedabad,Gujarat,India,380001,LOW,8.58,ACTIVE
+42,STU-000042,Tanvi,Rao,tanvi.rao42@university.edu,+918635717121,2005-07-16,"276, MG Road",Chennai,Tamil Nadu,India,600001,HIGH,6.2,ACTIVE
+43,STU-000043,Vivaan,Iyer,vivaan.iyer43@university.edu,+919578878472,2006-08-17,"137, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,7.1,ACTIVE
+44,STU-000044,Arjun,Patel,arjun.patel44@university.edu,+918113730349,2003-09-18,"303, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,7.7,ACTIVE
+45,STU-000045,Pari,Dutta,pari.dutta45@university.edu,+917068924321,2004-10-19,"376, MG Road",Delhi,Delhi,India,110001,VERY_HIGH,8.16,ACTIVE
+46,STU-000046,Vihaan,Reddy,vihaan.reddy46@university.edu,+917734732415,2005-11-20,"330, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,8.17,ACTIVE
+47,STU-000047,Dhruv,Reddy,dhruv.reddy47@university.edu,+919054348762,2006-12-21,"52, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,7.67,ACTIVE
+48,STU-000048,Vihaan,Reddy,vihaan.reddy48@university.edu,+918567527990,2003-01-22,"253, MG Road",Delhi,Delhi,India,110001,MEDIUM,8.44,ACTIVE
+49,STU-000049,Myra,Rao,myra.rao49@university.edu,+918192228119,2004-02-23,"899, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,6.56,ACTIVE
+50,STU-000050,Reyansh,Gupta,reyansh.gupta50@university.edu,+917400890876,2005-03-24,"64, MG Road",Chennai,Tamil Nadu,India,600001,LOW,8.07,ACTIVE
+51,STU-000051,Shaurya,Joshi,shaurya.joshi51@university.edu,+918772560614,2006-04-25,"900, MG Road",Mumbai,Maharashtra,India,400001,LOW,8.54,ACTIVE
+52,STU-000052,Pari,Sharma,pari.sharma52@university.edu,+918431689813,2003-05-26,"423, MG Road",Bengaluru,Karnataka,India,560001,LOW,8.31,ACTIVE
+53,STU-000053,Dhruv,Joshi,dhruv.joshi53@university.edu,+917976340828,2004-06-27,"294, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,9.08,ACTIVE
+54,STU-000054,Riya,Mukherjee,riya.mukherjee54@university.edu,+918099495557,2005-07-01,"493, MG Road",Pune,Maharashtra,India,411001,LOW,8.13,ACTIVE
+55,STU-000055,Vivaan,Patel,vivaan.patel55@university.edu,+917294646063,2006-08-02,"938, MG Road",Bengaluru,Karnataka,India,560001,HIGH,8.64,ACTIVE
+56,STU-000056,Pari,Rao,pari.rao56@university.edu,+919023212837,2003-09-03,"25, MG Road",Hyderabad,Telangana,India,500001,HIGH,7.0,ACTIVE
+57,STU-000057,Ishaan,Iyer,ishaan.iyer57@university.edu,+918594280678,2004-10-04,"270, MG Road",Bengaluru,Karnataka,India,560001,LOW,8.18,ACTIVE
+58,STU-000058,Aditya,Joshi,aditya.joshi58@university.edu,+918616854064,2005-11-05,"327, MG Road",Ahmedabad,Gujarat,India,380001,MEDIUM,7.09,ACTIVE
+59,STU-000059,Pari,Mehta,pari.mehta59@university.edu,+917660357028,2006-12-06,"646, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,7.24,ACTIVE
+60,STU-000060,Reyansh,Verma,reyansh.verma60@university.edu,+919897940887,2003-01-07,"163, MG Road",Pune,Maharashtra,India,411001,HIGH,6.57,ACTIVE
+61,STU-000061,Sai,Verma,sai.verma61@university.edu,+918565187989,2004-02-08,"882, MG Road",Mumbai,Maharashtra,India,400001,LOW,9.64,ACTIVE
+62,STU-000062,Diya,Gupta,diya.gupta62@university.edu,+919614612183,2005-03-09,"630, MG Road",Bengaluru,Karnataka,India,560001,MEDIUM,7.15,ACTIVE
+63,STU-000063,Kabir,Kumar,kabir.kumar63@university.edu,+919419823947,2006-04-10,"534, MG Road",Hyderabad,Telangana,India,500001,HIGH,8.16,ACTIVE
+64,STU-000064,Arjun,Joshi,arjun.joshi64@university.edu,+918837087203,2003-05-11,"761, MG Road",Chennai,Tamil Nadu,India,600001,LOW,8.4,ACTIVE
+65,STU-000065,Prisha,Nair,prisha.nair65@university.edu,+919697150711,2004-06-12,"325, MG Road",Delhi,Delhi,India,110001,VERY_HIGH,7.95,ACTIVE
+66,STU-000066,Ishaan,Rao,ishaan.rao66@university.edu,+917386735239,2005-07-13,"541, MG Road",Delhi,Delhi,India,110001,MEDIUM,8.07,ACTIVE
+67,STU-000067,Kabir,Nair,kabir.nair67@university.edu,+918965092881,2006-08-14,"748, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,8.1,ACTIVE
+68,STU-000068,Arjun,Chatterjee,arjun.chatterjee68@university.edu,+919093012730,2003-09-15,"95, MG Road",Delhi,Delhi,India,110001,HIGH,7.59,ACTIVE
+69,STU-000069,Riya,Rao,riya.rao69@university.edu,+918363303819,2004-10-16,"354, MG Road",Ahmedabad,Gujarat,India,380001,MEDIUM,9.12,ACTIVE
+70,STU-000070,Myra,Singh,myra.singh70@university.edu,+917967331961,2005-11-17,"623, MG Road",Kolkata,West Bengal,India,700001,MEDIUM,6.87,ACTIVE
+71,STU-000071,Reyansh,Bose,reyansh.bose71@university.edu,+919994351627,2006-12-18,"410, MG Road",Pune,Maharashtra,India,411001,LOW,6.07,ACTIVE
+72,STU-000072,Shaurya,Banerjee,shaurya.banerjee72@university.edu,+919543889492,2003-01-19,"245, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,7.5,ACTIVE
+73,STU-000073,Vihaan,Mehta,vihaan.mehta73@university.edu,+919864609571,2004-02-20,"601, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,8.25,ACTIVE
+74,STU-000074,Ishaan,Nair,ishaan.nair74@university.edu,+919253975312,2005-03-21,"499, MG Road",Delhi,Delhi,India,110001,MEDIUM,7.43,ACTIVE
+75,STU-000075,Sai,Sharma,sai.sharma75@university.edu,+919789062083,2006-04-22,"575, MG Road",Delhi,Delhi,India,110001,MEDIUM,7.04,ACTIVE
+76,STU-000076,Navya,Singh,navya.singh76@university.edu,+917227099913,2003-05-23,"248, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,8.25,ACTIVE
+77,STU-000077,Prisha,Bose,prisha.bose77@university.edu,+919280676270,2004-06-24,"597, MG Road",Ahmedabad,Gujarat,India,380001,LOW,7.44,ACTIVE
+78,STU-000078,Siya,Dutta,siya.dutta78@university.edu,+918644527805,2005-07-25,"229, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,7.82,ACTIVE
+79,STU-000079,Gauri,Choudhury,gauri.choudhury79@university.edu,+917947991374,2006-08-26,"737, MG Road",Pune,Maharashtra,India,411001,MEDIUM,8.08,ACTIVE
+80,STU-000080,Vihaan,Mukherjee,vihaan.mukherjee80@university.edu,+917330938008,2003-09-27,"384, MG Road",Bengaluru,Karnataka,India,560001,HIGH,7.29,ACTIVE
+81,STU-000081,Aditya,Chatterjee,aditya.chatterjee81@university.edu,+917165233822,2004-10-01,"789, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,8.13,ACTIVE
+82,STU-000082,Saanvi,Das,saanvi.das82@university.edu,+918596505611,2005-11-02,"553, MG Road",Chennai,Tamil Nadu,India,600001,MEDIUM,7.71,ACTIVE
+83,STU-000083,Saanvi,Banerjee,saanvi.banerjee83@university.edu,+919434221844,2006-12-03,"877, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,8.97,ACTIVE
+84,STU-000084,Myra,Chatterjee,myra.chatterjee84@university.edu,+917782143151,2003-01-04,"296, MG Road",Delhi,Delhi,India,110001,MEDIUM,8.42,ACTIVE
+85,STU-000085,Meera,Kumar,meera.kumar85@university.edu,+919939872750,2004-02-05,"811, MG Road",Delhi,Delhi,India,110001,MEDIUM,8.19,ACTIVE
+86,STU-000086,Khushi,Iyer,khushi.iyer86@university.edu,+918190630691,2005-03-06,"582, MG Road",Delhi,Delhi,India,110001,HIGH,6.89,ACTIVE
+87,STU-000087,Diya,Reddy,diya.reddy87@university.edu,+917890449364,2006-04-07,"166, MG Road",Mumbai,Maharashtra,India,400001,HIGH,6.96,ACTIVE
+88,STU-000088,Kabir,Patel,kabir.patel88@university.edu,+919957524661,2003-05-08,"529, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,8.74,ACTIVE
+89,STU-000089,Ishaan,Das,ishaan.das89@university.edu,+918540517014,2004-06-09,"216, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,6.29,ACTIVE
+90,STU-000090,Kavya,Iyer,kavya.iyer90@university.edu,+918441286217,2005-07-10,"778, MG Road",Hyderabad,Telangana,India,500001,LOW,7.35,ACTIVE
+91,STU-000091,Ayaan,Gupta,ayaan.gupta91@university.edu,+918266902876,2006-08-11,"878, MG Road",Mumbai,Maharashtra,India,400001,HIGH,8.54,ACTIVE
+92,STU-000092,Aditya,Dutta,aditya.dutta92@university.edu,+918662798673,2003-09-12,"945, MG Road",Hyderabad,Telangana,India,500001,MEDIUM,8.85,ACTIVE
+93,STU-000093,Vihaan,Nair,vihaan.nair93@university.edu,+917833133816,2004-10-13,"39, MG Road",Mumbai,Maharashtra,India,400001,MEDIUM,7.6,ACTIVE
+94,STU-000094,Tanvi,Nair,tanvi.nair94@university.edu,+917549446825,2005-11-14,"769, MG Road",Ahmedabad,Gujarat,India,380001,LOW,9.25,ACTIVE
+95,STU-000095,Prisha,Nair,prisha.nair95@university.edu,+917973484441,2006-12-15,"713, MG Road",Chennai,Tamil Nadu,India,600001,VERY_HIGH,8.22,ACTIVE
+96,STU-000096,Tanvi,Sharma,tanvi.sharma96@university.edu,+918620819209,2003-01-16,"124, MG Road",Ahmedabad,Gujarat,India,380001,MEDIUM,7.97,ACTIVE
+97,STU-000097,Krishna,Nair,krishna.nair97@university.edu,+918114743091,2004-02-17,"904, MG Road",Pune,Maharashtra,India,411001,LOW,6.43,ACTIVE
+98,STU-000098,Riya,Mukherjee,riya.mukherjee98@university.edu,+918069577728,2005-03-18,"181, MG Road",Chennai,Tamil Nadu,India,600001,LOW,6.83,ACTIVE
+99,STU-000099,Aditya,Dutta,aditya.dutta99@university.edu,+918797077260,2006-04-19,"843, MG Road",Bengaluru,Karnataka,India,560001,VERY_HIGH,7.71,ACTIVE
+100,STU-000100,Saanvi,Singh,saanvi.singh100@university.edu,+917181527696,2003-05-20,"505, MG Road",Hyderabad,Telangana,India,500001,LOW,8.15,ACTIVE

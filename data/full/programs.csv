@@ -1,0 +1,21 @@
+id,program_id,name,code,department,degree_level,duration_years,total_credits,status,description,tuition_base
+1,PRG-000001,Computer Science and Engineering,CS-BTECH,School of Computing,BACHELOR,4,160,ACTIVE,Standard curriculum for Computer Science and Engineering.,60000.00
+2,PRG-000002,Artificial Intelligence and Data Science,AI-BTECH,School of Computing,BACHELOR,4,160,ACTIVE,Standard curriculum for Artificial Intelligence and Data Science.,65000.00
+3,PRG-000003,Information Technology,IT-BTECH,School of Computing,BACHELOR,4,160,ACTIVE,Standard curriculum for Information Technology.,55000.00
+4,PRG-000004,Software Engineering,SE-MTECH,School of Computing,MASTER,2,80,ACTIVE,Standard curriculum for Software Engineering.,70000.00
+5,PRG-000005,Cybersecurity and Forensics,CY-MTECH,School of Computing,MASTER,2,80,ACTIVE,Standard curriculum for Cybersecurity and Forensics.,70000.00
+6,PRG-000006,Data Science and Analytics,DS-MS,School of Computing,MASTER,2,75,ACTIVE,Standard curriculum for Data Science and Analytics.,68000.00
+7,PRG-000007,Computer Science Research,CS-PHD,School of Computing,DOCTORATE,4,60,ACTIVE,Standard curriculum for Computer Science Research.,40000.00
+8,PRG-000008,Electronics and Communication,EC-BTECH,School of Electrical,BACHELOR,4,160,ACTIVE,Standard curriculum for Electronics and Communication.,55000.00
+9,PRG-000009,Electrical and Electronics,EE-BTECH,School of Electrical,BACHELOR,4,160,ACTIVE,Standard curriculum for Electrical and Electronics.,50000.00
+10,PRG-000010,VLSI Design and Embedded Systems,VLSI-MTECH,School of Electrical,MASTER,2,80,ACTIVE,Standard curriculum for VLSI Design and Embedded Systems.,65000.00
+11,PRG-000011,Mechanical Engineering,ME-BTECH,School of Mechanical,BACHELOR,4,160,ACTIVE,Standard curriculum for Mechanical Engineering.,48000.00
+12,PRG-000012,Robotics and Mechatronics,ROB-MTECH,School of Mechanical,MASTER,2,80,ACTIVE,Standard curriculum for Robotics and Mechatronics.,62000.00
+13,PRG-000013,Civil and Environmental Engineering,CE-BTECH,School of Civil,BACHELOR,4,160,ACTIVE,Standard curriculum for Civil and Environmental Engineering.,45000.00
+14,PRG-000014,Structural Engineering,SE-CIVIL-MS,School of Civil,MASTER,2,75,ACTIVE,Standard curriculum for Structural Engineering.,55000.00
+15,PRG-000015,Biotechnology,BT-BTECH,School of BioSciences,BACHELOR,4,160,ACTIVE,Standard curriculum for Biotechnology.,52000.00
+16,PRG-000016,Bioinformatics,BI-MS,School of BioSciences,MASTER,2,75,ACTIVE,Standard curriculum for Bioinformatics.,58000.00
+17,PRG-000017,Business Administration,BBA-BACH,School of Management,BACHELOR,3,120,ACTIVE,Standard curriculum for Business Administration.,45000.00
+18,PRG-000018,Finance and Accounting,MBA-FIN,School of Management,MASTER,2,90,ACTIVE,Standard curriculum for Finance and Accounting.,75000.00
+19,PRG-000019,Business Analytics,MBA-BA,School of Management,MASTER,2,90,ACTIVE,Standard curriculum for Business Analytics.,80000.00
+20,PRG-000020,Diploma in Cloud Computing,DIP-CC,School of Continuing Education,DIPLOMA,1,40,ACTIVE,Standard curriculum for Diploma in Cloud Computing.,30000.00

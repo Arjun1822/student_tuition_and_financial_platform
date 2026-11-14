@@ -1,0 +1,22 @@
+{
+  "scale": "starter",
+  "seed": 20261022,
+  "generated_at": "2026-11-14T10:19:05.911532+00:00",
+  "duration_seconds": 0.01,
+  "counts": {
+    "programs": 20,
+    "terms": 4,
+    "fee_schedules": 80,
+    "students": 100,
+    "enrollments": 300,
+    "scholarships": 5,
+    "invoices": 301,
+    "invoice_lines": 1800,
+    "eligibilities": 150,
+    "payments": 300,
+    "payment_allocations": 676,
+    "refunds": 1,
+    "financial_events": 600,
+    "injected_anomalies": 5
+  }
+}
