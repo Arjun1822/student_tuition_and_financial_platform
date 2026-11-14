@@ -14,6 +14,13 @@ import Enrollments from './pages/Enrollments';
 import EnrollmentDetails from './pages/EnrollmentDetails';
 import Invoices from './pages/Invoices';
 import InvoiceDetails from './pages/InvoiceDetails';
+import Scholarships from './pages/Scholarships';
+import Payments from './pages/Payments';
+import Refunds from './pages/Refunds';
+import Ledger from './pages/Ledger';
+import Reconciliation from './pages/Reconciliation';
+import Anomalies from './pages/Anomalies';
+import Reports from './pages/Reports';
 
 function ProtectedLayout() {
   const { isAuthenticated, loading } = useAuth();
@@ -69,6 +76,15 @@ export default function App() {
             <Route path="/enrollments/:id" element={<EnrollmentDetails />} />
             <Route path="/invoices" element={<Invoices />} />
             <Route path="/invoices/:id" element={<InvoiceDetails />} />
+
+            {/* Financial Management Core (Task 4) */}
+            <Route path="/scholarships" element={<Scholarships />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/refunds" element={<Refunds />} />
+            <Route path="/ledger" element={<Ledger />} />
+            <Route path="/reconciliation" element={<Reconciliation />} />
+            <Route path="/anomalies" element={<Anomalies />} />
+            <Route path="/reports" element={<Reports />} />
           </Route>
 
           {/* Catch-all */}

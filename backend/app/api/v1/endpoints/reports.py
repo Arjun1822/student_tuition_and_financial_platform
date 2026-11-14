@@ -97,12 +97,14 @@ def get_dashboard_metrics(
     # Outstanding by Program
     prog_outstanding = (
         db.query(
-            Program.program_code,
+            Program.code,
             func.coalesce(func.sum(Invoice.outstanding_balance), Decimal("0.00"))
         )
-        .join(Invoice, Invoice.program_id == Program.id)
+        .select_from(Invoice)
+        .join(Enrollment, Invoice.enrollment_id == Enrollment.id)
+        .join(Program, Enrollment.program_id == Program.id)
         .filter(Invoice.status != InvoiceStatus.CANCELLED)
-        .group_by(Program.program_code)
+        .group_by(Program.code)
         .order_by(func.sum(Invoice.outstanding_balance).desc())
         .limit(10)
         .all()
