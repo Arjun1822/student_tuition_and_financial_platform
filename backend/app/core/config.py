@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     MYSQL_HOST: str = "localhost"
     MYSQL_PORT: int = 3306
     MYSQL_USER: str = "root"
-    MYSQL_PASSWORD: str = "rootpassword"
+    MYSQL_PASSWORD: str = "root"
     MYSQL_DATABASE: str = "student_finance_db"
     
     # Security / Auth Settings
@@ -48,6 +48,12 @@ class Settings(BaseSettings):
         return (
             f"mysql+pymysql://{self.MYSQL_USER}:{self.MYSQL_PASSWORD}"
             f"@{self.MYSQL_HOST}:{self.MYSQL_PORT}/{self.MYSQL_DATABASE}?charset=utf8mb4"
+        )
+
+    def get_test_database_uri(self) -> str:
+        return (
+            f"mysql+pymysql://{self.MYSQL_USER}:{self.MYSQL_PASSWORD}"
+            f"@{self.MYSQL_HOST}:{self.MYSQL_PORT}/student_finance_test_db?charset=utf8mb4"
         )
 
     model_config = SettingsConfigDict(
