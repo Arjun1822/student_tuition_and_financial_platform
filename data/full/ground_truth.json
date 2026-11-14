@@ -4,8 +4,8 @@
     "issue_type": "PAYMENT_OVER_ALLOCATED",
     "entity_type": "PAYMENT",
     "entity_id": "PAY-2026-000001",
-    "expected_value": 35000.0,
-    "actual_value": 40000.0,
+    "expected_value": 17500.0,
+    "actual_value": 22500.0,
     "explanation": "Payment PAY-2026-000001 allocations exceed available amount."
   },
   {
@@ -40,8 +40,8 @@
     "issue_type": "BALANCE_MISMATCH",
     "entity_type": "INVOICE",
     "entity_id": "INV-STU-000001-2026-000003",
-    "expected_value": 0.0,
-    "actual_value": 4500.0,
+    "expected_value": 35000.0,
+    "actual_value": 39500.0,
     "explanation": "Invoice INV-STU-000001-2026-000003 stored balance disagrees with arithmetic."
   }
 ]

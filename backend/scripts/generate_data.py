@@ -161,6 +161,8 @@ class SyntheticDataGenerator:
                 "fee_schedules": len(fee_schedules),
                 "students": len(students),
                 "enrollments": len(enrollments),
+                "scholarship_programs": len(scholarships),
+                "scholarship_awards": len(eligibilities),
                 "scholarships": len(scholarships),
                 "invoices": len(invoices),
                 "invoice_lines": len(invoice_lines),
@@ -478,38 +480,23 @@ class SyntheticDataGenerator:
 
         methods = [PaymentMethod.UPI, PaymentMethod.BANK_TRANSFER, PaymentMethod.CREDIT_CARD, PaymentMethod.DEBIT_CARD]
 
-        for inv in invoices:
-            if pay_seq >= self.target_payments:
-                break
+        # Invoices count N (300 in starter, 30,000 in full)
+        # Target payments P (500 in starter, 50,000 in full)
+        # Mathematical installment distribution:
+        # u = 10% unpaid invoices (0 payments)
+        # d = P - N + u -> 2-installment invoices (Installment 1 = 50%, Installment 2 = 50% remainder)
+        # s = N - u - d -> 1-payment partial invoices (50% partial payment)
+        # Total payments = 0*u + 1*s + 2*d = P exactly!
+        n_invoices = len(invoices)
+        u = int(0.10 * n_invoices)
+        d = self.target_payments - n_invoices + u
+        s = n_invoices - u - d
 
-            remaining_inv_balance = inv["outstanding_balance"]
-            if remaining_inv_balance <= Decimal("0.00"):
-                continue
-
-            # Generate 1 or 2 payments per invoice
-            pay_amt = remaining_inv_balance if (pay_seq % 2 == 0) else (remaining_inv_balance / Decimal("2.00")).quantize(Decimal("0.01"))
-            pay_seq += 1
-            p_id = IDGenerator.payment_id(2026, pay_seq)
-
-            payment = {
-                "id": pay_seq,
-                "payment_id": p_id,
-                "student_id": inv["student_id"],
-                "amount": pay_amt,
-                "allocated_amount": Decimal("0.00"),
-                "unallocated_amount": pay_amt,
-                "payment_date": inv["invoice_date"] + timedelta(days=10),
-                "payment_method": self.rng.choice(methods),
-                "reference_number": f"REF-TXN-{pay_seq:07d}",
-                "currency": "INR",
-                "status": PaymentStatus.COMPLETED,
-                "notes": "Tuition settlement.",
-            }
-            payments.append(payment)
-
-            # Allocate funds across invoice lines
+        def allocate_payment(payment, pay_amt, inv):
+            nonlocal alloc_seq
             inv_lines = lines_by_inv.get(inv["id"], [])
             avail = pay_amt
+            alloc_within_pay = 0
             for l in inv_lines:
                 if avail <= Decimal("0.00"):
                     break
@@ -519,9 +506,10 @@ class SyntheticDataGenerator:
 
                 alloc_amt = min(avail, rem_line)
                 alloc_seq += 1
+                alloc_within_pay += 1
                 allocations.append({
                     "id": alloc_seq,
-                    "allocation_id": IDGenerator.allocation_id(payment["payment_id"], alloc_seq % 100 + 1),
+                    "allocation_id": IDGenerator.allocation_id(payment["payment_id"], alloc_within_pay),
                     "payment_id": payment["id"],
                     "invoice_line_id": l["id"],
                     "amount": alloc_amt,
@@ -539,6 +527,81 @@ class SyntheticDataGenerator:
                 inv["status"] = InvoiceStatus.PAID
             elif inv["amount_paid"] > Decimal("0.00"):
                 inv["status"] = InvoiceStatus.PARTIALLY_PAID
+
+        # Group 1: Unpaid (0 to u-1) -> 0 payments
+        for i in range(u):
+            inv = invoices[i]
+            inv["status"] = InvoiceStatus.ISSUED
+            inv["amount_paid"] = Decimal("0.00")
+            inv["outstanding_balance"] = inv["net_amount"]
+
+        # Group 2: Single partial payment (u to u+s-1) -> 1 payment
+        for i in range(u, u + s):
+            inv = invoices[i]
+            pay_amt = (inv["outstanding_balance"] * Decimal("0.50")).quantize(Decimal("0.01"))
+            pay_seq += 1
+            p_id = IDGenerator.payment_id(2026, pay_seq)
+            payment = {
+                "id": pay_seq,
+                "payment_id": p_id,
+                "student_id": inv["student_id"],
+                "amount": pay_amt,
+                "allocated_amount": Decimal("0.00"),
+                "unallocated_amount": pay_amt,
+                "payment_date": inv["invoice_date"] + timedelta(days=10),
+                "payment_method": self.rng.choice(methods),
+                "reference_number": f"REF-TXN-{pay_seq:07d}",
+                "currency": "INR",
+                "status": PaymentStatus.COMPLETED,
+                "notes": "Tuition partial settlement (Installment 1 of 2).",
+            }
+            payments.append(payment)
+            allocate_payment(payment, pay_amt, inv)
+
+        # Group 3: Two installment payments (u+s to n_invoices-1) -> 2 payments
+        for i in range(u + s, n_invoices):
+            inv = invoices[i]
+            # Installment 1: 50%
+            pay_amt1 = (inv["outstanding_balance"] * Decimal("0.50")).quantize(Decimal("0.01"))
+            pay_seq += 1
+            p_id1 = IDGenerator.payment_id(2026, pay_seq)
+            payment1 = {
+                "id": pay_seq,
+                "payment_id": p_id1,
+                "student_id": inv["student_id"],
+                "amount": pay_amt1,
+                "allocated_amount": Decimal("0.00"),
+                "unallocated_amount": pay_amt1,
+                "payment_date": inv["invoice_date"] + timedelta(days=10),
+                "payment_method": self.rng.choice(methods),
+                "reference_number": f"REF-TXN-{pay_seq:07d}",
+                "currency": "INR",
+                "status": PaymentStatus.COMPLETED,
+                "notes": "Tuition settlement (Installment 1 of 2).",
+            }
+            payments.append(payment1)
+            allocate_payment(payment1, pay_amt1, inv)
+
+            # Installment 2: Remaining balance
+            pay_amt2 = inv["outstanding_balance"]
+            pay_seq += 1
+            p_id2 = IDGenerator.payment_id(2026, pay_seq)
+            payment2 = {
+                "id": pay_seq,
+                "payment_id": p_id2,
+                "student_id": inv["student_id"],
+                "amount": pay_amt2,
+                "allocated_amount": Decimal("0.00"),
+                "unallocated_amount": pay_amt2,
+                "payment_date": inv["invoice_date"] + timedelta(days=25),
+                "payment_method": self.rng.choice(methods),
+                "reference_number": f"REF-TXN-{pay_seq:07d}",
+                "currency": "INR",
+                "status": PaymentStatus.COMPLETED,
+                "notes": "Tuition final settlement (Installment 2 of 2).",
+            }
+            payments.append(payment2)
+            allocate_payment(payment2, pay_amt2, inv)
 
         return payments, allocations
 

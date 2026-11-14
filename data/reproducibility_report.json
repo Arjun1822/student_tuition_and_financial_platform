@@ -1,23 +1,23 @@
 {
   "reproducibility_passed": true,
   "seed": 20261022,
-  "scale": "full",
+  "scale": "starter",
   "all_checksums_match": true,
   "manifest_match": true,
   "financial_match": true,
   "financial_totals": {
-    "invoices_gross": "2013070000.00",
-    "invoices_net": "1580452100.00",
-    "invoices_paid": "1179700200.00",
-    "payments_total": "1179682700.00",
-    "scholarships_awarded": "432582900.00"
+    "invoices_gross": "20200000.00",
+    "invoices_net": "15769700.00",
+    "invoices_paid": "13879350.00",
+    "payments_total": "13879350.00",
+    "scholarships_awarded": "4395300.00"
   },
   "file_comparisons": {
     "students.csv": {
-      "run1_sha256": "1acc42426d8f7a8e08301fd9cb1664a17ca1684e3b8bf318e8be4781fa1639fe",
-      "run2_sha256": "1acc42426d8f7a8e08301fd9cb1664a17ca1684e3b8bf318e8be4781fa1639fe",
-      "run1_rows": 10000,
-      "run2_rows": 10000,
+      "run1_sha256": "1248af2479b71abb685b6c3b2b07e285cf9e027d871ea07ae766aad49d377b87",
+      "run2_sha256": "1248af2479b71abb685b6c3b2b07e285cf9e027d871ea07ae766aad49d377b87",
+      "run1_rows": 100,
+      "run2_rows": 100,
       "matches": true
     },
     "programs.csv": {
@@ -42,78 +42,78 @@
       "matches": true
     },
     "enrollments.csv": {
-      "run1_sha256": "8f9a2239259e00699b5e07fc45f0c8826e4c9c1df097e8ea5a92a190d3262c4e",
-      "run2_sha256": "8f9a2239259e00699b5e07fc45f0c8826e4c9c1df097e8ea5a92a190d3262c4e",
-      "run1_rows": 30000,
-      "run2_rows": 30000,
+      "run1_sha256": "85fd3abbc2c57cabeadbc5b9d9d74d359058232a581268fa91db57038a61d55c",
+      "run2_sha256": "85fd3abbc2c57cabeadbc5b9d9d74d359058232a581268fa91db57038a61d55c",
+      "run1_rows": 300,
+      "run2_rows": 300,
       "matches": true
     },
     "scholarships.csv": {
-      "run1_sha256": "7b41b2b9c6866bae8aa71de00dd55f2ec2b759959f07383afd4856b4d6bd14ec",
-      "run2_sha256": "7b41b2b9c6866bae8aa71de00dd55f2ec2b759959f07383afd4856b4d6bd14ec",
+      "run1_sha256": "f93dc9db3cb600051799a85d0ff554b6a439174a2047958331cac4dc9f450b28",
+      "run2_sha256": "f93dc9db3cb600051799a85d0ff554b6a439174a2047958331cac4dc9f450b28",
       "run1_rows": 5,
       "run2_rows": 5,
       "matches": true
     },
     "invoices.csv": {
-      "run1_sha256": "02b4371f7c4dd574d7e30fef24fa70dc9e17329937463120708f2b344f75fc88",
-      "run2_sha256": "02b4371f7c4dd574d7e30fef24fa70dc9e17329937463120708f2b344f75fc88",
-      "run1_rows": 30001,
-      "run2_rows": 30001,
+      "run1_sha256": "824fc7c0a4f63c0a0d36de734770113be851ab82662d032ec0663dd5ef18838a",
+      "run2_sha256": "824fc7c0a4f63c0a0d36de734770113be851ab82662d032ec0663dd5ef18838a",
+      "run1_rows": 301,
+      "run2_rows": 301,
       "matches": true
     },
     "invoice_lines.csv": {
-      "run1_sha256": "f99a3bf30138fd71b184d012d8dfa996748dc6b6623e1bf88b7a07d182e435bc",
-      "run2_sha256": "f99a3bf30138fd71b184d012d8dfa996748dc6b6623e1bf88b7a07d182e435bc",
-      "run1_rows": 180000,
-      "run2_rows": 180000,
+      "run1_sha256": "719ca7638eb75bac7f4cb638a844b78ebca82044baa60ea17da23512465a1be1",
+      "run2_sha256": "719ca7638eb75bac7f4cb638a844b78ebca82044baa60ea17da23512465a1be1",
+      "run1_rows": 1800,
+      "run2_rows": 1800,
       "matches": true
     },
     "eligibilities.csv": {
-      "run1_sha256": "b8f750b66571c60dfd1de7fad49c974bc11d11290827785f3d954768d792e4c5",
-      "run2_sha256": "b8f750b66571c60dfd1de7fad49c974bc11d11290827785f3d954768d792e4c5",
-      "run1_rows": 15000,
-      "run2_rows": 15000,
+      "run1_sha256": "a42b675809ad795ff79dfc4ba1608e94267fe0f781e0da6bffd9b363d490bbaf",
+      "run2_sha256": "a42b675809ad795ff79dfc4ba1608e94267fe0f781e0da6bffd9b363d490bbaf",
+      "run1_rows": 150,
+      "run2_rows": 150,
       "matches": true
     },
     "payments.csv": {
-      "run1_sha256": "a74dd4041eb5ba96116311a736180301c3e1836fc395b5cfb1ab0f0b7a7145fe",
-      "run2_sha256": "a74dd4041eb5ba96116311a736180301c3e1836fc395b5cfb1ab0f0b7a7145fe",
-      "run1_rows": 30000,
-      "run2_rows": 30000,
+      "run1_sha256": "c68559ab7ed7b6bc3bc0f03157f094373868e69a8f47543abc929caeb0e7bd6f",
+      "run2_sha256": "c68559ab7ed7b6bc3bc0f03157f094373868e69a8f47543abc929caeb0e7bd6f",
+      "run1_rows": 500,
+      "run2_rows": 500,
       "matches": true
     },
     "payment_allocations.csv": {
-      "run1_sha256": "e26f68549b989670601e2366086f2a23cf7d906086035eb0faff7e2d99565149",
-      "run2_sha256": "e26f68549b989670601e2366086f2a23cf7d906086035eb0faff7e2d99565149",
-      "run1_rows": 67501,
-      "run2_rows": 67501,
+      "run1_sha256": "0620d5a9a5b9dd991601acc1d3e9403e5f0e877f04655fccf0c6e804ea61ccf5",
+      "run2_sha256": "0620d5a9a5b9dd991601acc1d3e9403e5f0e877f04655fccf0c6e804ea61ccf5",
+      "run1_rows": 1251,
+      "run2_rows": 1251,
       "matches": true
     },
     "refunds.csv": {
-      "run1_sha256": "8f0ebf09791e40e7dd6755017cdc69df6a9d1f173bb37590f79549b940acbb8a",
-      "run2_sha256": "8f0ebf09791e40e7dd6755017cdc69df6a9d1f173bb37590f79549b940acbb8a",
+      "run1_sha256": "debbe35132f0b97eb60133f7861851e072c3eb953190a002c2f31d19c9fc16a8",
+      "run2_sha256": "debbe35132f0b97eb60133f7861851e072c3eb953190a002c2f31d19c9fc16a8",
       "run1_rows": 1,
       "run2_rows": 1,
       "matches": true
     },
     "financial_events.csv": {
-      "run1_sha256": "d92e293f718d9476c8c8c08c6008ab168bdaad5ac0e3a04efd4390d82cae1993",
-      "run2_sha256": "d92e293f718d9476c8c8c08c6008ab168bdaad5ac0e3a04efd4390d82cae1993",
-      "run1_rows": 1000,
-      "run2_rows": 1000,
+      "run1_sha256": "1541cfa1e7fe63ba2de040f3a8133c90ccf21c18100f6c430252703ba567a462",
+      "run2_sha256": "1541cfa1e7fe63ba2de040f3a8133c90ccf21c18100f6c430252703ba567a462",
+      "run1_rows": 800,
+      "run2_rows": 800,
       "matches": true
     },
     "ground_truth.csv": {
-      "run1_sha256": "0a7a32de436640262572b0d38f20b224c75b6b30763373628d1249511bca2903",
-      "run2_sha256": "0a7a32de436640262572b0d38f20b224c75b6b30763373628d1249511bca2903",
+      "run1_sha256": "31851210a4b5b5695bc4998574bd55037fae5be1aa5cbd07ddec3caf0e0cf7e4",
+      "run2_sha256": "31851210a4b5b5695bc4998574bd55037fae5be1aa5cbd07ddec3caf0e0cf7e4",
       "run1_rows": 5,
       "run2_rows": 5,
       "matches": true
     },
     "ground_truth.json": {
-      "run1_sha256": "6c335e634eced79c702a881210c5255c7701a384e7efd71fdfac3515255fb214",
-      "run2_sha256": "6c335e634eced79c702a881210c5255c7701a384e7efd71fdfac3515255fb214",
+      "run1_sha256": "1920b98c6a641b611edf48e76c51a7a200fb57beb5a300716f182ece93f4b753",
+      "run2_sha256": "1920b98c6a641b611edf48e76c51a7a200fb57beb5a300716f182ece93f4b753",
       "matches": true
     }
   },

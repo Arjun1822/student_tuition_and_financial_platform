@@ -61,8 +61,8 @@
       {
         "issue_type": "PAYMENT_OVER_ALLOCATED",
         "entity_id": "PAY-2026-000001",
-        "expected_value": 35000.0,
-        "actual_value": 40000.0,
+        "expected_value": 17500.0,
+        "actual_value": 19500.0,
         "match": true
       },
       {
@@ -83,14 +83,14 @@
         "issue_type": "REFUND_EXCEEDS_PAID",
         "entity_id": "PAY-2026-000002",
         "expected_value": 17500.0,
-        "actual_value": 19500.0,
+        "actual_value": 16500.0,
         "match": true
       },
       {
         "issue_type": "BALANCE_MISMATCH",
         "entity_id": "INV-STU-000001-2026-000003",
-        "expected_value": 0.0,
-        "actual_value": 4500.0,
+        "expected_value": 35000.0,
+        "actual_value": 39500.0,
         "match": true
       }
     ]
