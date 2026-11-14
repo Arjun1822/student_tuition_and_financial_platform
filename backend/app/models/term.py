@@ -37,3 +37,4 @@ class Term(Base):
 
     def __repr__(self):
         return f"<Term(id={self.id}, term_id='{self.term_id}', name='{self.name}')>"
+

@@ -46,3 +46,4 @@ class Enrollment(Base):
 
     def __repr__(self):
         return f"<Enrollment(id={self.id}, enrollment_id='{self.enrollment_id}', status='{self.status}')>"
+

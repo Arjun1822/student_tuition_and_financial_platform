@@ -50,3 +50,4 @@ class FinancialEvent(Base):
 
     def __repr__(self):
         return f"<FinancialEvent(id={self.id}, event_id='{self.event_id}', type='{self.event_type}', entity='{self.entity_id}')>"
+

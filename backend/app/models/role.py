@@ -24,3 +24,4 @@ class Role(Base):
 
     def __repr__(self):
         return f"<Role(id={self.id}, name='{self.name}')>"
+

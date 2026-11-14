@@ -36,5 +36,10 @@ class InvoiceLine(Base):
     def remaining_amount(self):
         return self.amount - self.allocated_amount
 
+    @property
+    def line_id(self):
+        return self.invoice_line_id
+
     def __repr__(self):
         return f"<InvoiceLine(id={self.id}, line_id='{self.invoice_line_id}', fee_type='{self.fee_type}', amount={self.amount})>"
+

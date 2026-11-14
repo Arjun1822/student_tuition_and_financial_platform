@@ -26,3 +26,4 @@ class PaymentAllocation(Base):
 
     def __repr__(self):
         return f"<PaymentAllocation(id={self.id}, allocation_id='{self.allocation_id}', amount={self.amount})>"
+

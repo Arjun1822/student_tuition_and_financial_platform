@@ -47,3 +47,4 @@ class Eligibility(Base):
 
     def __repr__(self):
         return f"<Eligibility(id={self.id}, eligibility_id='{self.eligibility_id}', status='{self.status}', approved={self.approved_amount})>"
+

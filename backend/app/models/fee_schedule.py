@@ -48,3 +48,4 @@ class FeeSchedule(Base):
 
     def __repr__(self):
         return f"<FeeSchedule(id={self.id}, fee_schedule_id='{self.fee_schedule_id}', total={self.total_fee})>"
+

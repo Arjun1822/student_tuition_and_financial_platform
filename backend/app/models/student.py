@@ -55,3 +55,4 @@ class Student(Base):
 
     def __repr__(self):
         return f"<Student(id={self.id}, student_id='{self.student_id}', name='{self.full_name}')>"
+

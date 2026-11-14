@@ -1,4 +1,5 @@
 import enum
+from decimal import Decimal
 from sqlalchemy import Column, Integer, String, Date, Text, DateTime, ForeignKey, DECIMAL, Enum as SAEnum, Index
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -53,5 +54,30 @@ class Invoice(Base):
     lines = relationship("InvoiceLine", back_populates="invoice", cascade="all, delete-orphan")
     refunds = relationship("Refund", back_populates="invoice")
 
+    @property
+    def scholarship_amount(self):
+        return self.scholarship_discount or Decimal("0.00")
+
+    @scholarship_amount.setter
+    def scholarship_amount(self, value):
+        self.scholarship_discount = value
+
+    @property
+    def paid_amount(self):
+        return self.amount_paid or Decimal("0.00")
+
+    @paid_amount.setter
+    def paid_amount(self, value):
+        self.amount_paid = value
+
+    @property
+    def late_fee_amount(self):
+        return getattr(self, "_late_fee_amount", Decimal("0.00"))
+
+    @late_fee_amount.setter
+    def late_fee_amount(self, value):
+        self._late_fee_amount = value
+
     def __repr__(self):
         return f"<Invoice(id={self.id}, invoice_id='{self.invoice_id}', net={self.net_amount}, status='{self.status}')>"
+

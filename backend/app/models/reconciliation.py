@@ -71,3 +71,4 @@ class ReconciliationResult(Base):
 
     def __repr__(self):
         return f"<ReconciliationResult(id={self.id}, entity_id='{self.entity_id}', diff={self.difference}, status='{self.status}')>"
+

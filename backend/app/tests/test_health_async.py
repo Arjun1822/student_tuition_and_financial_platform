@@ -34,3 +34,4 @@ async def test_api_v1_health_endpoint_async():
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "healthy"
+

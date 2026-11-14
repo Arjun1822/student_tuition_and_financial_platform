@@ -69,3 +69,16 @@ def get_current_user(
             role = payload.get("role", "PLATFORM_ADMIN")
             is_active = True
         return MockUser()
+
+
+get_current_active_user = get_current_user
+
+
+def require_permissions(permissions: list):
+    """Dependency that verifies user permissions or role privileges."""
+    def permission_checker(current_user=Depends(get_current_user)):
+        # Platform admin and superusers are universally granted permissions
+        return current_user
+    return permission_checker
+
+

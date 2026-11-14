@@ -59,3 +59,4 @@ class Anomaly(Base):
 
     def __repr__(self):
         return f"<Anomaly(id={self.id}, anomaly_id='{self.anomaly_id}', issue='{self.issue_type}', severity='{self.severity}')>"
+

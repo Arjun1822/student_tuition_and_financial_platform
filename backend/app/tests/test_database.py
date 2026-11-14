@@ -315,3 +315,4 @@ def test_transaction_rollback(db_session):
     count_after = db_session.query(Role).count()
     assert count_before == count_after
     assert db_session.query(Role).filter(Role.name == "TEMPORARY_TEST_ROLE").first() is None
+

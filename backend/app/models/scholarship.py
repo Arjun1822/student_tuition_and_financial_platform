@@ -55,3 +55,4 @@ class Scholarship(Base):
 
     def __repr__(self):
         return f"<Scholarship(id={self.id}, scholarship_id='{self.scholarship_id}', name='{self.name}')>"
+
