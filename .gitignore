@@ -39,8 +39,3 @@ mysql_data/
 data/repro_run*/
 *.log
 
-# Recently created local documentation artifacts (not to be pushed)
-DATA_DICTIONARY.md
-HACKATHON_COMPLIANCE_REPORT.md
-HACKATHON_GAP_ANALYSIS.md
-VALIDATION_RESULTS.md

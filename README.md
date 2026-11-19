@@ -2,6 +2,8 @@
 
 An enterprise-grade, 3-tier financial management, accounting, and reconciliation platform built with FastAPI, React 18, MySQL 8.0, and Docker. The platform handles the complete institutional student financial lifecycle—including student onboarding, program fee structure scheduling, automated invoice generation, scholarship eligibility evaluation and awards governance, multi-channel payment allocation, payment reversals, student refunds, immutable event-sourced financial audit trails, multi-period balance reconciliation, heuristic anomaly detection, and real-time executive financial analytics.
 
+**GitHub Repository**: [https://github.com/Arjun1822/student_tuition_and_financial_platform](https://github.com/Arjun1822/student_tuition_and_financial_platform)
+
 ---
 
 ## 1. Key Features
