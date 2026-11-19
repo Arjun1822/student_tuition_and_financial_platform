@@ -16,7 +16,9 @@
         "eligibilities": true,
         "payments": true,
         "payment_allocations": true,
-        "refunds": true
+        "refunds": true,
+        "financial_events_id": true,
+        "financial_events_event_id": true
       },
       "foreign_keys": {
         "enrollments_to_students": true,
@@ -35,35 +37,176 @@
         "allocations_to_payments": true,
         "allocations_to_invoice_lines": true,
         "refunds_to_payments": true,
-        "refunds_to_students": true
+        "refunds_to_students": true,
+        "financial_events_source_references": true
       }
     }
+  },
+  "enums_and_dates": {
+    "passed": true,
+    "date_ordering_errors": 0,
+    "enum_domain_errors": 0
   },
   "financial_arithmetic": {
     "passed": true,
     "checks": {
       "invoice_arithmetic_valid": true,
       "payment_arithmetic_valid": true,
-      "scholarship_budgets_valid": true
+      "scholarship_budgets_valid": true,
+      "event_amount_parity_valid": true
     }
   },
   "anomaly_evaluation": {
+    "status": "COMPLETED",
+    "execution_mode": "DATASET_ENGINE",
     "passed": true,
     "ground_truth_count": 5,
     "detected_count": 5,
+    "true_positives": 5,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_negatives": 1747,
     "precision": 1.0,
     "recall": 1.0,
     "f1_score": 1.0,
-    "scenarios_evaluated": [
-      "PAYMENT_OVER_ALLOCATED",
-      "SCHOLARSHIP_EXCEEDS_FEES",
-      "DUPLICATE_INVOICE",
-      "REFUND_EXCEEDS_PAID",
-      "BALANCE_MISMATCH"
+    "by_category": {
+      "PAYMENT_OVER_ALLOCATED": {
+        "candidate_count": 500,
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_negatives": 499,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "SCHOLARSHIP_EXCEEDS_FEES": {
+        "candidate_count": 150,
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_negatives": 149,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "DUPLICATE_INVOICE": {
+        "candidate_count": 301,
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_negatives": 300,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "REFUND_EXCEEDS_PAID": {
+        "candidate_count": 500,
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_negatives": 499,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "BALANCE_MISMATCH": {
+        "candidate_count": 301,
+        "ground_truth_count": 1,
+        "detected_count": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_negatives": 300,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    "matched_anomalies": [
+      {
+        "issue_type": "PAYMENT_OVER_ALLOCATED",
+        "entity_id": "PAY-2026-000001",
+        "expected_value": 14500.0,
+        "actual_value": 19500.0,
+        "match": true
+      },
+      {
+        "issue_type": "SCHOLARSHIP_EXCEEDS_FEES",
+        "entity_id": "ELIG-000001",
+        "expected_value": 70000.0,
+        "actual_value": 85000.0,
+        "match": true
+      },
+      {
+        "issue_type": "DUPLICATE_INVOICE",
+        "entity_id": "INV-STU-000001-2026-000002-DUP",
+        "expected_value": 1.0,
+        "actual_value": 2.0,
+        "match": true
+      },
+      {
+        "issue_type": "REFUND_EXCEEDS_PAID",
+        "entity_id": "PAY-2026-000002",
+        "expected_value": 14500.0,
+        "actual_value": 16500.0,
+        "match": true
+      },
+      {
+        "issue_type": "BALANCE_MISMATCH",
+        "entity_id": "INV-STU-000001-2026-000003",
+        "expected_value": 35000.0,
+        "actual_value": 39500.0,
+        "match": true
+      }
     ]
   },
+  "export_artifacts": {
+    "all_csvs_present": true,
+    "all_jsons_present": true,
+    "sql_seed_present": true,
+    "csv_files": {
+      "students.csv": true,
+      "programs.csv": true,
+      "terms.csv": true,
+      "fee_schedules.csv": true,
+      "enrollments.csv": true,
+      "scholarships.csv": true,
+      "invoices.csv": true,
+      "invoice_lines.csv": true,
+      "eligibilities.csv": true,
+      "payments.csv": true,
+      "payment_allocations.csv": true,
+      "refunds.csv": true,
+      "financial_events.csv": true,
+      "ground_truth.csv": true
+    },
+    "json_files": {
+      "students.json": true,
+      "programs.json": true,
+      "terms.json": true,
+      "fee_schedules.json": true,
+      "enrollments.json": true,
+      "scholarships.json": true,
+      "invoices.json": true,
+      "invoice_lines.json": true,
+      "eligibilities.json": true,
+      "payments.json": true,
+      "payment_allocations.json": true,
+      "refunds.json": true,
+      "financial_events.json": true,
+      "ground_truth.json": true,
+      "generation_manifest.json": true
+    }
+  },
   "errors": [],
-  "warnings": [
-    "Database detection scan skipped (no active session): (pymysql.err.OperationalError) (2003, \"Can't connect to MySQL server on 'localhost' ([WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions)\")\n(Background on this error at: https://sqlalche.me/e/21/e3q8)"
-  ]
+  "warnings": []
 }

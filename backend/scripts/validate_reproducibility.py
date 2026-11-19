@@ -91,17 +91,21 @@ class ReproducibilityValidator:
 
         print("-> Comparing file checksums, record counts, and financial aggregates...")
 
-        csv_files = [
+        data_files = [
             "students.csv", "programs.csv", "terms.csv", "fee_schedules.csv",
             "enrollments.csv", "scholarships.csv", "invoices.csv", "invoice_lines.csv",
             "eligibilities.csv", "payments.csv", "payment_allocations.csv",
-            "refunds.csv", "financial_events.csv", "ground_truth.csv"
+            "refunds.csv", "financial_events.csv", "ground_truth.csv",
+            "students.json", "programs.json", "terms.json", "fee_schedules.json",
+            "enrollments.json", "scholarships.json", "invoices.json", "invoice_lines.json",
+            "eligibilities.json", "payments.json", "payment_allocations.json",
+            "refunds.json", "financial_events.json", "seed_data.sql"
         ]
 
         file_comparisons = {}
         all_checksums_match = True
 
-        for fname in csv_files:
+        for fname in data_files:
             p1 = os.path.join(self.dir1, fname)
             p2 = os.path.join(self.dir2, fname)
 
@@ -116,11 +120,19 @@ class ReproducibilityValidator:
             h1 = compute_sha256(p1)
             h2 = compute_sha256(p2)
 
-            # Count rows
-            with open(p1, "r", encoding="utf-8") as f:
-                r1_count = sum(1 for _ in f) - 1
-            with open(p2, "r", encoding="utf-8") as f:
-                r2_count = sum(1 for _ in f) - 1
+            # Count lines if text file
+            r1_count = 0
+            r2_count = 0
+            if fname.endswith(".csv"):
+                with open(p1, "r", encoding="utf-8") as f:
+                    r1_count = sum(1 for _ in f) - 1
+                with open(p2, "r", encoding="utf-8") as f:
+                    r2_count = sum(1 for _ in f) - 1
+            else:
+                with open(p1, "r", encoding="utf-8", errors="ignore") as f:
+                    r1_count = sum(1 for _ in f)
+                with open(p2, "r", encoding="utf-8", errors="ignore") as f:
+                    r2_count = sum(1 for _ in f)
 
             matches = (h1 == h2 and r1_count == r2_count)
             if not matches:

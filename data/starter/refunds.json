@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "refund_id": "REF-2026-009999",
+    "payment_id": 2,
+    "student_id": 11,
+    "invoice_id": null,
+    "amount": "16500.00",
+    "currency": "INR",
+    "reason": "Controlled test refund exceeding payment.",
+    "status": "PROCESSED",
+    "requested_date": "2026-01-27T00:00:00+00:00"
+  }
+]

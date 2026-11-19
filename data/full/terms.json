@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "term_id": "TERM-2025-FALL",
+    "name": "Fall Semester 2025",
+    "year": 2025,
+    "semester": "FALL",
+    "start_date": "2025-08-18",
+    "end_date": "2025-12-19",
+    "is_active": true,
+    "billing_cycle": "2025-FALL"
+  },
+  {
+    "id": 2,
+    "term_id": "TERM-2026-SPRING",
+    "name": "Spring Semester 2026",
+    "year": 2026,
+    "semester": "SPRING",
+    "start_date": "2026-01-12",
+    "end_date": "2026-05-20",
+    "is_active": true,
+    "billing_cycle": "2026-SPRING"
+  },
+  {
+    "id": 3,
+    "term_id": "TERM-2026-SUMMER",
+    "name": "Summer Term 2026",
+    "year": 2026,
+    "semester": "SUMMER",
+    "start_date": "2026-06-01",
+    "end_date": "2026-07-31",
+    "is_active": true,
+    "billing_cycle": "2026-SUMMER"
+  },
+  {
+    "id": 4,
+    "term_id": "TERM-2026-FALL",
+    "name": "Fall Semester 2026",
+    "year": 2026,
+    "semester": "FALL",
+    "start_date": "2026-08-17",
+    "end_date": "2026-12-18",
+    "is_active": true,
+    "billing_cycle": "2026-FALL"
+  }
+]

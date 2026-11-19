@@ -17,6 +17,9 @@ from app.models.term import Term, SemesterEnum
 from app.models.fee_schedule import FeeSchedule
 from app.models.enrollment import Enrollment, EnrollmentStatus
 from app.models.invoice import Invoice, InvoiceStatus
+from app.models.invoice_line import InvoiceLine, FeeType
+from app.models.payment_allocation import PaymentAllocation
+from app.services.anomaly_service import AnomalyDetectionService
 from app.models.scholarship import Scholarship, ScholarshipType, ScholarshipStatus
 from app.models.eligibility import Eligibility, EligibilityStatus
 from app.models.payment import Payment, PaymentMethod, PaymentStatus
@@ -364,6 +367,17 @@ async def test_refund_lifecycle(auth_headers):
         assert proc_res.status_code == 200, proc_res.text
         assert proc_res.json()["status"] == "PROCESSED"
 
+        # Verify financial event emitted with exact amount parity and refund entity reference
+        events_res = await client.get("/api/v1/ledger/events", headers=auth_headers)
+        assert events_res.status_code == 200, events_res.text
+        events_list = events_res.json()["items"]
+        matching_event = next(
+            (e for e in events_list if e["entity_type"] == "REFUND" and e["entity_id"] == refund["refund_id"] and e["event_type"] == "REFUND_PROCESSED"),
+            None
+        )
+        assert matching_event is not None, "REFUND_PROCESSED financial event must be logged"
+        assert Decimal(matching_event["amount"]) == Decimal("5000.00"), "Event amount must match refund amount exactly"
+
 
 @pytest.mark.asyncio
 async def test_anomaly_detection_scan(auth_headers):
@@ -379,3 +393,317 @@ async def test_anomaly_detection_scan(auth_headers):
         list_res = await client.get("/api/v1/anomalies", headers=auth_headers)
         assert list_res.status_code == 200, list_res.text
         assert "items" in list_res.json()
+
+
+@pytest.mark.asyncio
+async def test_anomaly_boundary_conditions(auth_headers):
+    """
+    Negative and boundary tests for all 5 anomaly detection rules.
+    Verifies that:
+    1. Normal records are NOT flagged (True Negatives / negative controls).
+    2. Exact boundary conditions (allocated == amount, approved == eligible_fee, etc.) are NOT flagged.
+    3. Over-boundary conditions (> threshold) ARE flagged (True Positives).
+    4. CANCELLED invoices and REJECTED refunds are excluded from anomaly scans.
+    """
+    db = TestSessionLocal()
+    try:
+        detector = AnomalyDetectionService(db)
+
+        # Ensure a base scholarship exists for FK
+        sch = db.query(Scholarship).first()
+        if not sch:
+            sch = Scholarship(
+                scholarship_id="SCH-BD-001",
+                name="Boundary Scholarship",
+                scholarship_type=ScholarshipType.MERIT,
+                percentage=Decimal("50.00"),
+                max_amount=Decimal("50000.00"),
+                total_budget=Decimal("500000.00"),
+                academic_year="2026-2027",
+                status=ScholarshipStatus.ACTIVE
+            )
+            db.add(sch)
+            db.flush()
+
+        # Ensure a base invoice and line exist for FK
+        base_inv = db.query(Invoice).first()
+        if not base_inv:
+            base_inv = Invoice(
+                invoice_id="INV-PARENT-001",
+                enrollment_id=1,
+                student_id=1,
+                term_id=1,
+                invoice_date=date(2026, 1, 10),
+                due_date=date(2026, 2, 10),
+                gross_amount=Decimal("10000.00"),
+                net_amount=Decimal("10000.00"),
+                outstanding_balance=Decimal("10000.00"),
+                billing_cycle="2026-BASE-CYCLE",
+                status=InvoiceStatus.ISSUED
+            )
+            db.add(base_inv)
+            db.flush()
+
+        inv_line = db.query(InvoiceLine).first()
+        if not inv_line:
+            inv_line = InvoiceLine(
+                invoice_line_id="INV-LINE-PARENT-001",
+                invoice_id=base_inv.id,
+                fee_type=FeeType.TUITION,
+                description="Tuition Fee Base",
+                amount=Decimal("10000.00"),
+                allocated_amount=Decimal("0.00")
+            )
+            db.add(inv_line)
+            db.flush()
+
+        # Rule 1 Boundary: Payment exact vs over-allocated
+        p_exact = Payment(
+            payment_id="PAY-BD-EXACT",
+            student_id=1,
+            amount=Decimal("1000.00"),
+            allocated_amount=Decimal("1000.00"),
+            unallocated_amount=Decimal("0.00"),
+            payment_method=PaymentMethod.UPI,
+            status=PaymentStatus.COMPLETED
+        )
+        p_over = Payment(
+            payment_id="PAY-BD-OVER",
+            student_id=1,
+            amount=Decimal("1000.00"),
+            allocated_amount=Decimal("1000.01"),
+            unallocated_amount=Decimal("0.00"),
+            payment_method=PaymentMethod.UPI,
+            status=PaymentStatus.COMPLETED
+        )
+        db.add_all([p_exact, p_over])
+        db.flush()
+
+        alloc_exact = PaymentAllocation(
+            allocation_id="ALLOC-BD-EXACT",
+            payment_id=p_exact.id,
+            invoice_line_id=inv_line.id,
+            amount=Decimal("1000.00")
+        )
+        alloc_over = PaymentAllocation(
+            allocation_id="ALLOC-BD-OVER",
+            payment_id=p_over.id,
+            invoice_line_id=inv_line.id,
+            amount=Decimal("1000.01")
+        )
+        db.add_all([alloc_exact, alloc_over])
+
+        # Rule 2 Boundary: Scholarship exact vs over-awarded vs pending
+        e_exact = Eligibility(
+            eligibility_id="ELIG-BD-EXACT",
+            student_id=1,
+            scholarship_id=sch.id,
+            eligible_fee_amount=Decimal("20000.00"),
+            approved_amount=Decimal("20000.00"),
+            status=EligibilityStatus.APPROVED,
+            decision_reason="Exact fee match boundary"
+        )
+        e_pending = Eligibility(
+            eligibility_id="ELIG-BD-PENDING",
+            student_id=1,
+            scholarship_id=sch.id,
+            eligible_fee_amount=Decimal("20000.00"),
+            approved_amount=Decimal("30000.00"),
+            status=EligibilityStatus.PENDING,
+            decision_reason="Pending must not trigger anomaly"
+        )
+        e_over = Eligibility(
+            eligibility_id="ELIG-BD-OVER",
+            student_id=1,
+            scholarship_id=sch.id,
+            eligible_fee_amount=Decimal("20000.00"),
+            approved_amount=Decimal("20000.01"),
+            status=EligibilityStatus.APPROVED,
+            decision_reason="Over fee by 0.01"
+        )
+        db.add_all([e_exact, e_pending, e_over])
+
+        # Rule 3 Boundary: Duplicate invoice with cancelled vs active duplicate
+        inv_cancel = Invoice(
+            invoice_id="INV-BD-CANCELLED",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("5000.00"),
+            net_amount=Decimal("5000.00"),
+            outstanding_balance=Decimal("0.00"),
+            billing_cycle="2026-CYCLE-CANCELLED-TEST",
+            status=InvoiceStatus.CANCELLED
+        )
+        inv_active = Invoice(
+            invoice_id="INV-BD-ACTIVE",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("5000.00"),
+            net_amount=Decimal("5000.00"),
+            outstanding_balance=Decimal("5000.00"),
+            billing_cycle="2026-CYCLE-CANCELLED-TEST",
+            status=InvoiceStatus.ISSUED
+        )
+        # Active duplicate pair
+        inv_dup1 = Invoice(
+            invoice_id="INV-BD-DUP1",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("5000.00"),
+            net_amount=Decimal("5000.00"),
+            outstanding_balance=Decimal("5000.00"),
+            billing_cycle="2026-CYCLE-DUP-TEST",
+            status=InvoiceStatus.ISSUED
+        )
+        inv_dup2 = Invoice(
+            invoice_id="INV-BD-DUP2",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("5000.00"),
+            net_amount=Decimal("5000.00"),
+            outstanding_balance=Decimal("5000.00"),
+            billing_cycle="2026-CYCLE-DUP-TEST",
+            status=InvoiceStatus.ISSUED
+        )
+        db.add_all([inv_cancel, inv_active, inv_dup1, inv_dup2])
+
+        # Rule 4 Boundary: Refund exact vs rejected vs over
+        p_ref = Payment(
+            payment_id="PAY-BD-REFUND-SRC",
+            student_id=1,
+            amount=Decimal("5000.00"),
+            allocated_amount=Decimal("0.00"),
+            unallocated_amount=Decimal("5000.00"),
+            payment_method=PaymentMethod.UPI,
+            status=PaymentStatus.COMPLETED
+        )
+        db.add(p_ref)
+        db.flush()
+
+        ref_exact = Refund(
+            refund_id="REF-BD-EXACT",
+            payment_id=p_ref.id,
+            student_id=1,
+            amount=Decimal("5000.00"),
+            reason="Full refund exact",
+            status=RefundStatus.PROCESSED
+        )
+        # Another payment for rejected
+        p_ref_rej = Payment(
+            payment_id="PAY-BD-REFUND-REJ-SRC",
+            student_id=1,
+            amount=Decimal("2000.00"),
+            allocated_amount=Decimal("0.00"),
+            unallocated_amount=Decimal("2000.00"),
+            payment_method=PaymentMethod.UPI,
+            status=PaymentStatus.COMPLETED
+        )
+        db.add(p_ref_rej)
+        db.flush()
+
+        ref_rejected = Refund(
+            refund_id="REF-BD-REJECTED",
+            payment_id=p_ref_rej.id,
+            student_id=1,
+            amount=Decimal("99999.00"),
+            reason="Rejected refund must not flag",
+            status=RefundStatus.REJECTED
+        )
+        # Payment for over refund
+        p_ref_over = Payment(
+            payment_id="PAY-BD-REFUND-OVER-SRC",
+            student_id=1,
+            amount=Decimal("3000.00"),
+            allocated_amount=Decimal("0.00"),
+            unallocated_amount=Decimal("3000.00"),
+            payment_method=PaymentMethod.UPI,
+            status=PaymentStatus.COMPLETED
+        )
+        db.add(p_ref_over)
+        db.flush()
+
+        ref_over = Refund(
+            refund_id="REF-BD-OVER",
+            payment_id=p_ref_over.id,
+            student_id=1,
+            amount=Decimal("3000.01"),
+            reason="Over refund by 0.01",
+            status=RefundStatus.REQUESTED
+        )
+        db.add_all([ref_exact, ref_rejected, ref_over])
+
+        # Rule 5 Boundary: Stored balance exact vs mismatched
+        inv_bal_exact = Invoice(
+            invoice_id="INV-BD-BAL-EXACT",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("10000.00"),
+            scholarship_discount=Decimal("2000.00"),
+            net_amount=Decimal("8000.00"),
+            amount_paid=Decimal("3000.00"),
+            outstanding_balance=Decimal("5000.00"),
+            billing_cycle="2026-CYCLE-BAL-EXACT",
+            status=InvoiceStatus.PARTIALLY_PAID
+        )
+        inv_bal_mismatch = Invoice(
+            invoice_id="INV-BD-BAL-MISMATCH",
+            enrollment_id=1,
+            student_id=1,
+            term_id=1,
+            invoice_date=date(2026, 1, 10),
+            due_date=date(2026, 2, 10),
+            gross_amount=Decimal("10000.00"),
+            scholarship_discount=Decimal("0.00"),
+            net_amount=Decimal("10000.00"),
+            amount_paid=Decimal("0.00"),
+            outstanding_balance=Decimal("9999.99"),  # Missing 0.01
+            billing_cycle="2026-CYCLE-BAL-MISMATCH",
+            status=InvoiceStatus.ISSUED
+        )
+        db.add_all([inv_bal_exact, inv_bal_mismatch])
+        db.commit()
+
+        # Run Anomaly Detector
+        detected = detector.scan_for_anomalies()
+        detected_entity_ids = {a.entity_id for a in detected}
+
+        # Rule 1 Verifications:
+        assert "PAY-BD-EXACT" not in detected_entity_ids, "Exact allocation must not be flagged"
+        assert "PAY-BD-OVER" in detected_entity_ids, "Over-allocated payment must be flagged"
+
+        # Rule 2 Verifications:
+        assert "ELIG-BD-EXACT" not in detected_entity_ids, "Exact fee eligibility must not be flagged"
+        assert "ELIG-BD-PENDING" not in detected_entity_ids, "Pending eligibility must not be flagged"
+        assert "ELIG-BD-OVER" in detected_entity_ids, "Over-awarded eligibility must be flagged"
+
+        # Rule 3 Verifications:
+        assert "INV-BD-CANCELLED" not in detected_entity_ids, "Cancelled invoice must not trigger duplicate"
+        assert "INV-BD-ACTIVE" not in detected_entity_ids, "Active invoice paired with cancelled must not trigger duplicate"
+        assert "INV-BD-DUP2" in detected_entity_ids, "Second active invoice in duplicate cycle must be flagged"
+
+        # Rule 4 Verifications:
+        assert "PAY-BD-REFUND-SRC" not in detected_entity_ids, "Exact refund must not trigger anomaly"
+        assert "PAY-BD-REFUND-REJ-SRC" not in detected_entity_ids, "Rejected refund must not trigger anomaly"
+        assert "PAY-BD-REFUND-OVER-SRC" in detected_entity_ids, "Over-refunded payment must be flagged"
+
+        # Rule 5 Verifications:
+        assert "INV-BD-BAL-EXACT" not in detected_entity_ids, "Exact balance invoice must not be flagged"
+        assert "INV-BD-BAL-MISMATCH" in detected_entity_ids, "Mismatched balance invoice must be flagged"
+
+    finally:
+        db.close()

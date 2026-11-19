@@ -1,7 +1,7 @@
 {
   "scale": "starter",
   "seed": 20261022,
-  "generated_at": "2026-11-14T10:26:43.931163+00:00",
+  "generated_at": "2026-11-19T05:29:54.881045+00:00",
   "duration_seconds": 0.01,
   "counts": {
     "programs": 20,
@@ -18,7 +18,7 @@
     "payments": 500,
     "payment_allocations": 1251,
     "refunds": 1,
-    "financial_events": 800,
+    "financial_events": 2200,
     "injected_anomalies": 5
   }
 }

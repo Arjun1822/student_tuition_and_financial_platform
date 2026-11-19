@@ -39,7 +39,12 @@ An enterprise-grade, 3-tier financial management, accounting, and reconciliation
    - Discrepancy detection with classification into `MATCHED`, `MISMATCHED`, and `EXCEPTION` outcomes.
 
 8. **Heuristic Anomaly Detection**:
-   - Rule-based detection across 5 ground-truth financial integrity scenarios: Ghost Payments (orphaned references), Scholarship Exceeds Fees, Invoice Total Mismatches, Duplicate Term Invoices, and Negative Balances.
+   - Rule-based detection across 5 ground-truth financial integrity scenarios:
+     1. `PAYMENT_OVER_ALLOCATED`: Payment allocated beyond the actual payment amount.
+     2. `SCHOLARSHIP_EXCEEDS_FEES`: Scholarship award exceeds eligible tuition charges.
+     3. `DUPLICATE_INVOICE`: Duplicate invoice generation for the same student, enrollment, and term.
+     4. `REFUND_EXCEEDS_PAID`: Refund exceeds the net amount actually paid and settled, considering prior refunds.
+     5. `BALANCE_MISMATCH`: Stored invoice/student balance disagrees with ledger-derived arithmetic.
    - Complete anomaly investigation and resolution lifecycle tracking (`OPEN` $\rightarrow$ `INVESTIGATING` $\rightarrow$ `RESOLVED`).
 
 9. **Executive Analytics Dashboard & Reporting**:
@@ -313,8 +318,8 @@ Interactive Swagger documentation is available at `http://127.0.0.1:8000/docs`.
 $env:PYTHONPATH = "C:\CandidateWorkspace\backend"
 .\.venv\Scripts\python.exe -m pytest backend/app/tests -v
 ```
-- **Total Tests**: 22 tests across 4 test modules (`test_database.py`, `test_health_async.py`, `test_milestone3.py`, `test_milestones4_5.py`).
-- **Pass Rate**: 100% (22/22 passed).
+- **Total Tests**: 23 tests across 4 test modules (`test_database.py`, `test_health_async.py`, `test_milestone3.py`, `test_milestones4_5.py`).
+- **Pass Rate**: 100% (23/23 passed).
 
 ### Frontend Vitest Suite
 ```powershell
@@ -346,11 +351,11 @@ The platform includes a deterministic synthetic data generation engine seeded fo
 
 ### Generation Commands
 ```powershell
-# Generate full dataset
-python backend\scripts\generate_data.py --scale full --seed 20261022
+# Generate starter dataset (exports CSV, JSON, and seed_data.sql)
+python backend\scripts\generate_data.py --scale starter --seed 20261022 --export-dir data/starter
 
-# Generate starter dataset
-python backend\scripts\generate_data.py --scale starter --seed 20261022
+# Generate full dataset (exports CSV, JSON, and seed_data.sql)
+python backend\scripts\generate_data.py --scale full --seed 20261022 --export-dir data/full
 ```
 
 ### Validation Commands
@@ -361,11 +366,12 @@ python backend\scripts\validate_data.py --data-dir data/starter
 # Validate full dataset compliance
 python backend\scripts\validate_data.py --data-dir data/full
 
-# Verify bit-identical SHA-256 reproducibility
-python backend\scripts\validate_reproducibility.py
+# Verify bit-identical SHA-256 reproducibility across CSV, JSON, and SQL seed files
+python backend\scripts\validate_reproducibility.py --scale starter --seed 20261022
 ```
-- **Validation Results**: 100% compliance across foreign keys, constraint checks, and financial totals.
-- **Reproducibility**: 15 of 15 generated CSV files verified bit-identical (SHA-256 identical).
+- **Validation Results**: 100% compliance across primary/foreign keys, enum domains, date ordering, financial arithmetic, and anomaly evaluations.
+- **Anomaly Detection Evaluation**: 100% Precision, 100% Recall, F1=1.0 across all 5 mandatory scenarios.
+- **Reproducibility**: 100% bit-identical SHA-256 matching across all CSV, JSON, and SQL seed files.
 
 ---
 

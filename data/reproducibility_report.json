@@ -98,10 +98,10 @@
       "matches": true
     },
     "financial_events.csv": {
-      "run1_sha256": "1541cfa1e7fe63ba2de040f3a8133c90ccf21c18100f6c430252703ba567a462",
-      "run2_sha256": "1541cfa1e7fe63ba2de040f3a8133c90ccf21c18100f6c430252703ba567a462",
-      "run1_rows": 800,
-      "run2_rows": 800,
+      "run1_sha256": "87c9ff156e5d032bbdb50424b57de95b81cc4a00ee7fc966f69a00f33cd4c2ed",
+      "run2_sha256": "87c9ff156e5d032bbdb50424b57de95b81cc4a00ee7fc966f69a00f33cd4c2ed",
+      "run1_rows": 2200,
+      "run2_rows": 2200,
       "matches": true
     },
     "ground_truth.csv": {
@@ -109,6 +109,104 @@
       "run2_sha256": "31851210a4b5b5695bc4998574bd55037fae5be1aa5cbd07ddec3caf0e0cf7e4",
       "run1_rows": 5,
       "run2_rows": 5,
+      "matches": true
+    },
+    "students.json": {
+      "run1_sha256": "facc6fb46efd5848094028b7cd835564873a7e0f9a24847e5b98c27d77d26e67",
+      "run2_sha256": "facc6fb46efd5848094028b7cd835564873a7e0f9a24847e5b98c27d77d26e67",
+      "run1_rows": 1702,
+      "run2_rows": 1702,
+      "matches": true
+    },
+    "programs.json": {
+      "run1_sha256": "3fd89dc303a6fe6680588a45144c049f7d8dd62624af206de46ed3dd14160357",
+      "run2_sha256": "3fd89dc303a6fe6680588a45144c049f7d8dd62624af206de46ed3dd14160357",
+      "run1_rows": 262,
+      "run2_rows": 262,
+      "matches": true
+    },
+    "terms.json": {
+      "run1_sha256": "61216fbdc5b3caf2821e12844129e44ff5752a96586c7156742746fd02ea3579",
+      "run2_sha256": "61216fbdc5b3caf2821e12844129e44ff5752a96586c7156742746fd02ea3579",
+      "run1_rows": 46,
+      "run2_rows": 46,
+      "matches": true
+    },
+    "fee_schedules.json": {
+      "run1_sha256": "ebfa7ff0ec3a517e8fd18f68c652e780b9eb4032ad8579deac84a2b64c4e7cef",
+      "run2_sha256": "ebfa7ff0ec3a517e8fd18f68c652e780b9eb4032ad8579deac84a2b64c4e7cef",
+      "run1_rows": 1362,
+      "run2_rows": 1362,
+      "matches": true
+    },
+    "enrollments.json": {
+      "run1_sha256": "6ea66c726a3cff880c9c28c02fa4a14c83364cec52f8ae7a4bb0c276ca647f69",
+      "run2_sha256": "6ea66c726a3cff880c9c28c02fa4a14c83364cec52f8ae7a4bb0c276ca647f69",
+      "run1_rows": 3002,
+      "run2_rows": 3002,
+      "matches": true
+    },
+    "scholarships.json": {
+      "run1_sha256": "3bb88425e84717ce7e570f5c55311594f7b85295ce82a4dcf1ff99dfe0efae1a",
+      "run2_sha256": "3bb88425e84717ce7e570f5c55311594f7b85295ce82a4dcf1ff99dfe0efae1a",
+      "run1_rows": 77,
+      "run2_rows": 77,
+      "matches": true
+    },
+    "invoices.json": {
+      "run1_sha256": "94db3a8627b93607b59d2f91fadac1798bd334cb286d47039623d9db6c92f7a9",
+      "run2_sha256": "94db3a8627b93607b59d2f91fadac1798bd334cb286d47039623d9db6c92f7a9",
+      "run1_rows": 5420,
+      "run2_rows": 5420,
+      "matches": true
+    },
+    "invoice_lines.json": {
+      "run1_sha256": "3d3eaac0393fedbef06fa8fb900bdb73c881a9771aca29c8555c1e089e9ac809",
+      "run2_sha256": "3d3eaac0393fedbef06fa8fb900bdb73c881a9771aca29c8555c1e089e9ac809",
+      "run1_rows": 16202,
+      "run2_rows": 16202,
+      "matches": true
+    },
+    "eligibilities.json": {
+      "run1_sha256": "4981f3ffd5843b277f446079775b7fbf3f5ed830c43e760eda468ab1ca61bf22",
+      "run2_sha256": "4981f3ffd5843b277f446079775b7fbf3f5ed830c43e760eda468ab1ca61bf22",
+      "run1_rows": 2252,
+      "run2_rows": 2252,
+      "matches": true
+    },
+    "payments.json": {
+      "run1_sha256": "b37e27d40f772b7efe8343a7ba4cb46bff2f9c7e2ed5434a8b0e9fbf629e3361",
+      "run2_sha256": "b37e27d40f772b7efe8343a7ba4cb46bff2f9c7e2ed5434a8b0e9fbf629e3361",
+      "run1_rows": 7002,
+      "run2_rows": 7002,
+      "matches": true
+    },
+    "payment_allocations.json": {
+      "run1_sha256": "c0a9192ef1e0ca44feac063ec76aa8fcd8304db017f368df85de7cc8799fbca5",
+      "run2_sha256": "c0a9192ef1e0ca44feac063ec76aa8fcd8304db017f368df85de7cc8799fbca5",
+      "run1_rows": 10010,
+      "run2_rows": 10010,
+      "matches": true
+    },
+    "refunds.json": {
+      "run1_sha256": "7c8c16a9822ed1e4158764b90fd5b3538c56353abca71a973c95cee06703a842",
+      "run2_sha256": "7c8c16a9822ed1e4158764b90fd5b3538c56353abca71a973c95cee06703a842",
+      "run1_rows": 14,
+      "run2_rows": 14,
+      "matches": true
+    },
+    "financial_events.json": {
+      "run1_sha256": "c8ce6b87bf034dd0e135d812d3ae1336453531dd4be37c4588688465fb08029f",
+      "run2_sha256": "c8ce6b87bf034dd0e135d812d3ae1336453531dd4be37c4588688465fb08029f",
+      "run1_rows": 22002,
+      "run2_rows": 22002,
+      "matches": true
+    },
+    "seed_data.sql": {
+      "run1_sha256": "0fe2d1119db8cdfb3a9100f7d0d79cd3bf59787efd6710fcc5ddba1d97f1d16e",
+      "run2_sha256": "0fe2d1119db8cdfb3a9100f7d0d79cd3bf59787efd6710fcc5ddba1d97f1d16e",
+      "run1_rows": 6765,
+      "run2_rows": 6765,
       "matches": true
     },
     "ground_truth.json": {

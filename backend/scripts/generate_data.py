@@ -144,8 +144,8 @@ class SyntheticDataGenerator:
         payments, allocations = self._generate_payments(students, invoices, invoice_lines)
         # 10. Refunds
         refunds = self._generate_refunds(payments)
-        # 11. Financial Events
-        events = self._generate_financial_events(invoices, payments, refunds)
+        # 11. Financial Events (complete audit trail — every transaction gets an event)
+        events = self._generate_financial_events(invoices, payments, refunds, eligibilities, allocations)
 
         # 12. Controlled Injected Anomalies (The 5 Mandatory Scenarios)
         self._inject_anomalies(payments, allocations, eligibilities, enrollments, invoices, invoice_lines, refunds)
@@ -633,11 +633,25 @@ class SyntheticDataGenerator:
         self,
         invoices: List[Dict[str, Any]],
         payments: List[Dict[str, Any]],
-        refunds: List[Dict[str, Any]]
+        refunds: List[Dict[str, Any]],
+        eligibilities: Optional[List[Dict[str, Any]]] = None,
+        allocations: Optional[List[Dict[str, Any]]] = None,
     ) -> List[Dict[str, Any]]:
+        """Generate a financial event for EVERY transaction — no sampling.
+
+        Event types generated:
+          - INVOICE_ISSUED   for every invoice
+          - PAYMENT_RECEIVED for every payment
+          - PAYMENT_ALLOCATED for every payment allocation
+          - SCHOLARSHIP_APPROVED for every approved eligibility
+          - REFUND_PROCESSED for every processed refund
+        This guarantees a complete audit trail at any scale.
+        """
         events = []
         evt_seq = 0
-        for inv in invoices[:500]:
+
+        # 1. Invoice events — ALL invoices
+        for inv in invoices:
             evt_seq += 1
             events.append({
                 "id": evt_seq,
@@ -649,7 +663,9 @@ class SyntheticDataGenerator:
                 "currency": "INR",
                 "event_timestamp": datetime.combine(inv["invoice_date"], datetime.min.time(), tzinfo=timezone.utc),
             })
-        for p in payments[:500]:
+
+        # 2. Payment events — ALL payments
+        for p in payments:
             evt_seq += 1
             events.append({
                 "id": evt_seq,
@@ -661,6 +677,63 @@ class SyntheticDataGenerator:
                 "currency": "INR",
                 "event_timestamp": datetime.combine(p["payment_date"], datetime.min.time(), tzinfo=timezone.utc),
             })
+
+        # 3. Payment allocation events — ALL allocations
+        if allocations:
+            for a in allocations:
+                evt_seq += 1
+                events.append({
+                    "id": evt_seq,
+                    "event_id": IDGenerator.event_id(evt_seq),
+                    "entity_type": "PAYMENT_ALLOCATION",
+                    "entity_id": a["allocation_id"],
+                    "event_type": FinancialEventType.PAYMENT_ALLOCATED,
+                    "amount": a["amount"],
+                    "currency": "INR",
+                    "event_timestamp": datetime.combine(a["allocated_date"], datetime.min.time(), tzinfo=timezone.utc),
+                })
+
+        # 4. Scholarship approval events — ALL approved eligibilities
+        if eligibilities:
+            for elig in eligibilities:
+                if elig.get("status") == EligibilityStatus.APPROVED or str(elig.get("status")) == "APPROVED":
+                    evt_seq += 1
+                    events.append({
+                        "id": evt_seq,
+                        "event_id": IDGenerator.event_id(evt_seq),
+                        "entity_type": "SCHOLARSHIP_ELIGIBILITY",
+                        "entity_id": elig["eligibility_id"],
+                        "event_type": FinancialEventType.SCHOLARSHIP_APPROVED,
+                        "amount": elig["approved_amount"],
+                        "currency": "INR",
+                        "event_timestamp": datetime.combine(
+                            elig["evaluation_date"] if isinstance(elig["evaluation_date"], date) else date.fromisoformat(str(elig["evaluation_date"])[:10]),
+                            datetime.min.time(), tzinfo=timezone.utc
+                        ),
+                    })
+
+        # 5. Refund events — ALL processed refunds
+        for r in refunds:
+            if r.get("status") == RefundStatus.PROCESSED or str(r.get("status")) == "PROCESSED":
+                evt_seq += 1
+                r_date = r.get("requested_date")
+                if isinstance(r_date, datetime):
+                    ts = r_date if r_date.tzinfo else r_date.replace(tzinfo=timezone.utc)
+                elif isinstance(r_date, date):
+                    ts = datetime.combine(r_date, datetime.min.time(), tzinfo=timezone.utc)
+                else:
+                    ts = datetime.now(timezone.utc)
+                events.append({
+                    "id": evt_seq,
+                    "event_id": IDGenerator.event_id(evt_seq),
+                    "entity_type": "REFUND",
+                    "entity_id": r["refund_id"],
+                    "event_type": FinancialEventType.REFUND_PROCESSED,
+                    "amount": r["amount"],
+                    "currency": "INR",
+                    "event_timestamp": ts,
+                })
+
         return events
 
     def _inject_anomalies(
@@ -847,10 +920,33 @@ class SyntheticDataGenerator:
                             clean_row[k] = str(v)
                         elif isinstance(v, (list, dict)):
                             clean_row[k] = json.dumps(v)
+                        elif hasattr(v, "value"):
+                            clean_row[k] = v.value
                         else:
                             clean_row[k] = v
                     writer.writerow(clean_row)
 
+        # Helper to dump JSON
+        def write_json(filename, dict_list):
+            if not dict_list:
+                return
+            clean_list = []
+            for row in dict_list:
+                clean_row = {}
+                for k, v in row.items():
+                    if isinstance(v, Decimal):
+                        clean_row[k] = str(v)
+                    elif isinstance(v, (date, datetime)):
+                        clean_row[k] = v.isoformat()
+                    elif hasattr(v, "value"):
+                        clean_row[k] = v.value
+                    else:
+                        clean_row[k] = v
+                clean_list.append(clean_row)
+            with open(os.path.join(self.export_dir, filename), "w", encoding="utf-8") as f:
+                json.dump(clean_list, f, indent=2)
+
+        # Export all CSV files
         write_csv("students.csv", students)
         write_csv("programs.csv", programs)
         write_csv("terms.csv", terms)
@@ -866,14 +962,108 @@ class SyntheticDataGenerator:
         write_csv("financial_events.csv", events)
         write_csv("ground_truth.csv", self.ground_truth)
 
-        # JSON exports
+        # Export all JSON datasets
+        write_json("students.json", students)
+        write_json("programs.json", programs)
+        write_json("terms.json", terms)
+        write_json("fee_schedules.json", fee_schedules)
+        write_json("enrollments.json", enrollments)
+        write_json("scholarships.json", scholarships)
+        write_json("invoices.json", invoices)
+        write_json("invoice_lines.json", invoice_lines)
+        write_json("eligibilities.json", eligibilities)
+        write_json("payments.json", payments)
+        write_json("payment_allocations.json", allocations)
+        write_json("refunds.json", refunds)
+        write_json("financial_events.json", events)
+
+        # JSON exports for ground truth and manifest
         with open(os.path.join(self.export_dir, "ground_truth.json"), "w", encoding="utf-8") as f:
             json.dump(self.ground_truth, f, indent=2)
 
         with open(os.path.join(self.export_dir, "generation_manifest.json"), "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2)
 
+        # SQL Seed Data Export (Deterministic INSERTs for MySQL 8)
+        self._export_sql_seed(
+            programs, terms, fee_schedules, students, enrollments,
+            scholarships, invoices, invoice_lines, eligibilities,
+            payments, allocations, refunds, events
+        )
+
         print("-> Export files written successfully.")
+
+    def _export_sql_seed(
+        self,
+        programs, terms, fee_schedules, students, enrollments,
+        scholarships, invoices, invoice_lines, eligibilities,
+        payments, allocations, refunds, events
+    ):
+        sql_path = os.path.join(self.export_dir, "seed_data.sql")
+        
+        def sql_escape_value(val: Any) -> str:
+            if val is None:
+                return "NULL"
+            if isinstance(val, (int, float)):
+                return str(val)
+            if isinstance(val, Decimal):
+                return str(val)
+            if isinstance(val, bool):
+                return "1" if val else "0"
+            if hasattr(val, "value"):
+                val = val.value
+            if isinstance(val, (date, datetime)):
+                return f"'{val}'"
+            if isinstance(val, (dict, list)):
+                escaped = json.dumps(val).replace("'", "''").replace("\\", "\\\\")
+                return f"'{escaped}'"
+            escaped = str(val).replace("'", "''").replace("\\", "\\\\")
+            return f"'{escaped}'"
+
+        def format_inserts(table_name: str, records: List[Dict[str, Any]], batch_size: int = 500) -> List[str]:
+            if not records:
+                return []
+            columns = list(records[0].keys())
+            col_list_str = ", ".join(f"`{c}`" for c in columns)
+            statements = []
+            for i in range(0, len(records), batch_size):
+                chunk = records[i:i + batch_size]
+                row_strs = []
+                for row in chunk:
+                    vals = [sql_escape_value(row.get(c)) for c in columns]
+                    row_strs.append(f"({', '.join(vals)})")
+                statements.append(f"INSERT INTO `{table_name}` ({col_list_str}) VALUES\n  " + ",\n  ".join(row_strs) + ";\n")
+            return statements
+
+        with open(sql_path, "w", encoding="utf-8") as f:
+            f.write("-- Deterministic SQL Seed Data for Student Financial Platform\n")
+            f.write(f"-- Scale: {self.scale} | Seed: {self.seed}\n")
+            f.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
+
+            tables = [
+                ("programs", programs),
+                ("terms", terms),
+                ("fee_schedules", fee_schedules),
+                ("students", students),
+                ("enrollments", enrollments),
+                ("scholarships", scholarships),
+                ("invoices", invoices),
+                ("invoice_lines", invoice_lines),
+                ("eligibilities", eligibilities),
+                ("payments", payments),
+                ("payment_allocations", allocations),
+                ("refunds", refunds),
+                ("financial_events", events),
+            ]
+
+            for table_name, data in tables:
+                f.write(f"-- Table: `{table_name}` ({len(data)} rows)\n")
+                inserts = format_inserts(table_name, data)
+                for stmt in inserts:
+                    f.write(stmt)
+                f.write("\n")
+
+            f.write("SET FOREIGN_KEY_CHECKS = 1;\n")
 
 
 def main():
